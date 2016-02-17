@@ -132,7 +132,41 @@ input:focus {
 	top: 4px;
 	left: 3px;
 }
-
+ul {
+	position: relative;
+}
+ul.days-data {
+	margin-top: -45px;
+}
+ul.days-text li {
+	width: 36px;
+	height: 36px;
+	color: #fff;
+	display: inline-block;
+	text-align: center;
+}
+ul.days-data li {
+	width: 36px;
+	height: 36px;
+	margin-left: -4px;
+	display: inline-block;
+	border: 2px solid #3f5368;
+}
+ul.days-data li:last-child {
+	margin-left: -3px;
+}
+.green {
+	background: #a2d3bf;
+}
+.yellow {
+	background: #d3c2a2;
+}
+.red {
+	background: #d3a2a2;
+}
+.none {
+	background: #c8c8c8;
+}
 .ui-datepicker {
 	background: #fff;
 	width: 17em;
