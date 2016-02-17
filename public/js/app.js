@@ -14,25 +14,37 @@ function Count(data){
 				
 var counts = []
 var countMap = {}
-countMap[0] = 0
-countMap[1] = 0
+var fails = 0
 
 var socket = undefined
 var socketAdr = 'ws://node-red-counter.mybluemix.net/ws/counter'
+var currentDate = undefined
+
 $(document).ready(function(){
 	var today = new Date()
-	today.setHours(7)
+	today.setHours(0)
 	today.setMinutes(0)
 	today.setSeconds(0)
 	today.setMilliseconds(0)
 	var dateStr = $.datepicker.formatDate('dd/mm/y', new Date())
-
+	
+	currentDate = today
   $("#datepicker").datepicker({
 		onClose: function(){
-			console.log("close")
 			console.log(dateStr)
+			var newDate = $("#datepicker").datepicker('getDate')
+			console.log(newDate)
+			console.log(currentDate)
+			console.log(newDate.getTime() == currentDate.getTime())
+
+			if (newDate.getTime() != currentDate.getTime()){
+				currentDate = newDate
+				changeDate()
+			}
+
+
 		}	
-	}).datepicker('setDate', new Date())
+	}).datepicker('setDate', currentDate)
 
 	connectSocket()
 })
@@ -50,15 +62,32 @@ function connectSocket(){
 	}
 }
 
+function changeDate(){
+	countMap[0] = 0
+	countMap[1] = 0
+	counts = []
+	setValues()
+	var toDate = new Date(currentDate) 
+	toDate.setDate(toDate.getDate()+1)
+	var json = JSON.stringify({fromDate: currentDate.toISOString(), toDate: toDate.toISOString()})
+	console.log(json)
+	socket.send(json)
+}
+
+
 function socketOnOpen(){
 	console.log('Websocket open')
-	var today = new Date()
-	today.setHours(7)
-	today.setMinutes(0)
-	today.setSeconds(0)
-	today.setMilliseconds(0)
+	countMap[0] = 0
+	countMap[1] = 0
+	counts = []
+	fails = 0
 
-	var json = JSON.stringify({fromDate: today.toISOString()})
+	var toDate = new Date(currentDate.getTime()) 
+	console.log(toDate.getDate())
+	toDate.setDate(toDate.getDate()+1)
+	console.log(toDate)
+	var json = JSON.stringify({fromDate: currentDate.toISOString(), toDate: toDate.toISOString()})
+	console.log(json)
 	socket.send(json)
 }
 
@@ -66,6 +95,7 @@ function socketOnMessage(evt){
 	console.log('message')
 	var data = JSON.parse(evt.data)
 
+	console.log(data)
 	if (data.rows && $.isArray(data.rows)){
 		data = data.rows
 
@@ -94,8 +124,22 @@ function setValues(){
 
 function socketOnClose(){
 	console.log('Websocket close')
+	if (fails < 3){
+		connectSocket()
+	} else {
+		console.log("tried connecting to socket to many times")
+	}
+
+	fails++
 }
 
 function socketOnError(){
 	console.log('Websocket error')
+	if (fails < 3){
+		connectSocket()
+	} else {
+		console.log("tried connecting to socket to many times")
+	}
+
+	fails++
 }
