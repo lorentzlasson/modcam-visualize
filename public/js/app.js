@@ -212,8 +212,14 @@ function setMostOccupied(raw){
 
 	console.log(maxHour + ': ' + numOfP)
 
+
+	if (maxHour){
+		$('#most').html(maxHour + ':00 ' + (maxHour > '11' ? 'pm' : 'am')+ ' | ' + numOfP + ' people')
+	} else {
+		$('#most').html('- | - ')
+	}
+
 	
-	$('#most').html(maxHour + ':00 ' + (maxHour > '11' ? 'pm' : 'am')+ ' | ' + numOfP + ' people')
 }
 
 function socketOnMessage(evt){
