@@ -20,6 +20,12 @@ var socket = undefined
 var socketAdr = 'ws://node-red-counter.mybluemix.net/ws/counter'
 var currentDate = undefined
 
+var today = new Date()
+today.setHours(0)
+today.setMinutes(0)
+today.setSeconds(0)
+today.setMilliseconds(0)
+
 $(document).ready(function(){
 	var today = new Date()
 	today.setHours(0)
@@ -105,9 +111,11 @@ function socketOnMessage(evt){
 			addToCount(c)
 		}
 	} else {
-		var c = new Count(data)
-		counts.push(c)
-		addToCount(c)
+		if (today.getTime() == currentDate.getTime()){
+			var c = new Count(data)
+			counts.push(c)
+			addToCount(c)
+		}
 	}
 
 	setValues()
