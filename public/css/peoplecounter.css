@@ -251,6 +251,9 @@ ul.days-data li:last-child {
 	border: 2px solid #d7dfe4;
 	display: none;
 }
+#ui-datepicker-div {
+	z-index: 99999 !important;
+}
 .ui-datepicker .ui-datepicker-header {
 	position: relative;
 	padding: .2em 0;
