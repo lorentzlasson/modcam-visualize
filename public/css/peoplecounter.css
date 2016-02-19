@@ -177,6 +177,10 @@ ul.days-data li:last-child {
 	left: -25px;
 	margin-top: 25px;
 }
+.week-title {
+	font-size: 24px;
+	color: #fff;
+}
 /* TOOLTIP */
 
 [data-tooltip] {
