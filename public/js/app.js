@@ -189,6 +189,9 @@ function socketOnOpen(){
 	lateCurrent.setHours(23)
 	var hourRequest = JSON.stringify({startKey: currentDate.toISOString(), endKey: lateCurrent.toISOString(), reqType: "TotalByHour"})
 	socket.send(hourRequest)
+
+	var mostFlowRequest = JSON.stringify({reqType: 'MostFlow'})
+	socket.send(mostFlowRequest)
 }
 
 function setMostOccupied(raw){
@@ -201,11 +204,9 @@ function setMostOccupied(raw){
 	var totalIn = 0
 	var totalOut = 0
 	
-	console.log(movMap)
 
 	for (var r in rows){
 		movMap[rows[r].key[4]] += rows[r].value
-		console.log(movMap[0] + ':' + movMap[1] + ' -> ' + (movMap[0] - movMap[1]))
 		var num = movMap[0] - movMap[1]
 		if (num > numOfP){
 			numOfP = num
@@ -213,11 +214,9 @@ function setMostOccupied(raw){
 		}
 	}
 
-	console.log(maxHour + ': ' + numOfP)
 
 
 	if (maxHour){
-			console.log(parseInt(maxHour) + 1)
 		$('#most').html(paddWithZero(parseInt(maxHour) + 1) + ':00 ' + (maxHour > '11' ? 'pm' : 'am')+ ' | ' + numOfP + ' people')
 	} else {
 		$('#most').html('- | - ')
@@ -229,6 +228,26 @@ function setMostOccupied(raw){
 function paddWithZero(n){
 	return n < 10 ? "0" + n : "" + n
 }
+
+function setMostFlow(raw){
+	var min = raw.min
+	var max = raw.max
+
+	if (max){
+		$('#mostOccupied').html(max.key[2] + 'th ' + monthNames[parseInt(max.key[1])-1] + ' ' + max.key[0] + ' | ' + max.value + ' people in total')
+	} else {
+		$('#mostOccupied').html(' - | - ')
+	}
+
+
+	if (min){
+
+		$('#leastOccupied').html(min.key[2] + 'th ' + monthNames[parseInt(min.key[1])-1] + ' ' + min.key[0] + ' | ' + min.value + ' people in total')
+	} else {
+		$('#leastOccupied').html(' - | - ')
+	}
+}
+
 
 function socketOnMessage(evt){
 	var data = JSON.parse(evt.data)
@@ -253,6 +272,10 @@ function socketOnMessage(evt){
 		console.log('Hour')
 		console.log(data.rows)
 		setMostOccupied(data)
+	} else if (data.reqType == 'MostFlow'){
+		console.log('Most Flow')
+		console.log(data)
+		setMostFlow(data)
 	}
 }
 
@@ -282,6 +305,7 @@ var socket = undefined
 var socketAdr = 'ws://node-red-counter.mybluemix.net/ws/counter'
 var today = getToday()
 var currentDate = new Date(today)
+var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 
 $(document).ready(function(){
