@@ -197,6 +197,9 @@ function setMostOccupied(raw){
 	var numOfP = 0
 	var hourMap = {}
 	var movMap = { 0: 0, 1: 0}
+
+	var totalIn = 0
+	var totalOut = 0
 	
 	console.log(movMap)
 
@@ -214,12 +217,17 @@ function setMostOccupied(raw){
 
 
 	if (maxHour){
-		$('#most').html(maxHour + ':00 ' + (maxHour > '11' ? 'pm' : 'am')+ ' | ' + numOfP + ' people')
+			console.log(parseInt(maxHour) + 1)
+		$('#most').html(paddWithZero(parseInt(maxHour) + 1) + ':00 ' + (maxHour > '11' ? 'pm' : 'am')+ ' | ' + numOfP + ' people')
 	} else {
 		$('#most').html('- | - ')
 	}
 
 	
+}
+
+function paddWithZero(n){
+	return n < 10 ? "0" + n : "" + n
 }
 
 function socketOnMessage(evt){
