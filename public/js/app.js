@@ -66,6 +66,7 @@ function setWeekColor(name, value){
 
 
 	$('#'+name).removeClass('none green yellow red').addClass(cname)
+	$('#'+name).attr('data-tooltip', value)
 }
 
 function setWeek(raw){
@@ -160,6 +161,7 @@ function updateSelectedDate(newDate){
 	lateCurrent.setHours(23)
 	var hourRequest = JSON.stringify({startKey: currentDate.toISOString(), endKey: lateCurrent.toISOString(), reqType: "TotalByHour"})
 	socket.send(hourRequest)
+	$('#week').html(currentDate.getWeek())
 }
 
 function connectSocket(){
@@ -316,6 +318,7 @@ var monthNames = ["January", "February", "March", "April", "May", "June", "July"
 $(document).ready(function(){
 	createDatepicker()
 	connectSocket()
+	$('#week').html(currentDate.getWeek())
 })
 
 
