@@ -167,6 +167,9 @@ function updateSelectedDate(newDate){
 	var hourRequest = JSON.stringify({startKey: currentDate.toISOString(), endKey: lateCurrent.toISOString(), reqType: "TotalByHour"})
 	socket.send(hourRequest)
 	$('#week').html(currentDate.getWeek())
+
+	var bleRequest = JSON.stringify({startKey: currentDate.toISOString(), endKey: currentDate.toISOString(), reqType: "TotalBleByDate"})
+	socket.send(bleRequest)
 }
 
 function connectSocket(){
@@ -300,7 +303,11 @@ function socketOnMessage(evt){
 	} else if (data.reqType == 'TotalBleByDate'){
 		console.log('Total BLE by Date')
 		console.log(data)
-		$('#comp-ble').html(data.rows[0].value)
+		if (data.rows && data.rows.length > 0){
+			$('#comp-ble').html(data.rows[0].value)
+		} else {
+			$('#comp-ble').html(0)
+		}
 	} else if (data.reqType == 'bleLive' && today.getTime() == currentDate.getTime()){
 		console.log('Live BLE data')
 		console.log(data)
