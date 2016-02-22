@@ -71,6 +71,11 @@ function setWeekColor(name, value){
 
 function setWeek(raw){
 	$('.days-data li').removeClass('none green yellow red').addClass('none')
+
+	for (var i = 0; i < 7; i++){
+		var day = getDayName(''+i)
+		$('#' + day).attr('data-tooltip', 0)	
+	}
 	
 	var newRows = {}
 	var rows = raw.rows
@@ -313,6 +318,7 @@ var socketAdr = 'ws://node-red-counter.mybluemix.net/ws/counter'
 var today = getToday()
 var currentDate = new Date(today)
 var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var colors = ['none']
 
 
 $(document).ready(function(){
