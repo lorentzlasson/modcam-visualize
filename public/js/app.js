@@ -204,6 +204,11 @@ function socketOnOpen(){
 
 	var mostFlowRequest = JSON.stringify({reqType: 'MostFlow'})
 	socket.send(mostFlowRequest)
+
+
+
+	var bleRequest = JSON.stringify({startKey: currentDate.toISOString(), endKey: currentDate.toISOString(), reqType: "TotalBleByDate"})
+	socket.send(bleRequest)
 }
 
 function setMostOccupied(raw){
@@ -268,14 +273,18 @@ function socketOnMessage(evt){
 		console.log("Today data")
 		console.log(data.rows)
 		setByRow(data)
+		$('#comp-modcam').html(countMap[0]+countMap[1])
 	} else if (data.reqType == "Live" && today.getTime() == currentDate.getTime()) {
 		console.log("Live data")
 		console.log(data)
 		update(data.direction, data.count)
+		var v = $('#comp-modcam').html()
+		$('#comp-modcam').html(parseInt(v)+data.count)
 	} else if (data.reqType == 'TotalByDate'){
 		console.log('Total by Date')
 		console.log(data.rows)
 		setByRow(data)
+		$('#comp-modcam').html(countMap[0]+countMap[1])
 	} else if (data.reqType == 'Week'){
 		console.log('Week')
 		console.log(data.rows)
@@ -288,6 +297,15 @@ function socketOnMessage(evt){
 		console.log('Most Flow')
 		console.log(data)
 		setMostFlow(data)
+	} else if (data.reqType == 'TotalBleByDate'){
+		console.log('Total BLE by Date')
+		console.log(data)
+		$('#comp-ble').html(data.rows[0].value)
+	} else if (data.reqType == 'bleLive' && today.getTime() == currentDate.getTime()){
+		console.log('Live BLE data')
+		console.log(data)
+		var v = $('#comp-ble').html()
+		$('#comp-ble').html(parseInt(v)+1)
 	}
 }
 
