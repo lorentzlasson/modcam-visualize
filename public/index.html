@@ -8,8 +8,22 @@
 </head>
 <body>
   <header>
-    People Counter
+      <div class="container">
+      <div class="row">
+        <div class="six columns">
+           People Counter
+        </div>
+        <div class="six columns">
+          <label class="label-select-date" for="">Select a date to analyze:</label>
+          <div class="date-time">
+             <img src="images/cal.png" class="calendar-icon" alt="" width="20" height="20">
+             <input type="text" id="datepicker" placeholder="Select a date to analyze">
+          </div>
+        </div>
+      </div>
+    </div>
   </header>
+   
   <div class="container">
     <div class="row">
       <div class="seven columns">
@@ -18,7 +32,7 @@
           <div class="wrapper">
             <div class="box">
               <div class="image-circle">
-               <img src="images/in.png" width="50" height="50">
+               <img src="images/in.png" width="40" height="40">
              </div>
              <div class="counter" id="in">-</div>
              <div class="countertype">In</div>
@@ -26,22 +40,55 @@
 
            <div class="box right">
              <div class="image-circle">
-               <img src="images/out.png" width="50" height="50">
+               <img src="images/out.png" width="40" height="40">
              </div>
              <div class="counter" id="out">-</div>
              <div class="countertype">Out</div>
            </div>
-
-           <div class="date-time">
-             <img src="images/cal.png" class="calendar-icon" alt="" width="20" height="20">
-             <input type="text" id="datepicker" placeholder="Select a date to analyze">
-           </div>
-
-
          </div>
        </section>
      </div>
      <div class="five columns">
+       <section id="ble">
+         <h3>Bluetooth vs Modcam</h3>
+          <div class="wrapper">
+            <div class="box">
+              <div class="image-circle">
+              <span class="ble-count">272</span>
+             </div>
+             <div class="ble-countertype">Bluetooth LE</div>
+           </div>
+
+           <div class="box right">
+             <div class="image-circle">
+              <span class="ble-count">300</span>
+             </div>
+             <div class="ble-countertype">Modcam</div>
+           </div>
+         </div>
+       </section>
+     </div>
+     <div class="row">
+       <div class="four columns">
+         <div class="widget day">
+           <div class="sec-title">The most occupied time of the day</div>
+           <div class="sec-number" id="most"> - | - </div>
+         </div>
+       </div>
+       <div class="four columns">
+         <div class="widget day">
+           <div class="sec-title">Most occupied date in the office</div>
+              <div class="sec-date" id="mostOccupied"> - | - </div>
+         </div>
+       </div>
+       <div class="four columns">
+         <div class="widget day">
+           <div class="sec-title">Least occupied date in the office</div>
+              <div class="sec-date" id="leastOccupied"> - | - </div>
+         </div>
+       </div>
+     </div>
+    <!-- <div class="five columns">
        <section id="widgets">
          <div class="widget day">
            <div class="title" >The most occupied time of the day</div>
@@ -57,9 +104,9 @@
               <div class="date" id="leastOccupied"> - | - </div>
          </div>
        </section>
-     </div>
+     </div>-->
    </div>
-   <div class="row">
+  <!-- <div class="row">
      <div class="seven columns weekly-indicator">
       <div class="week-wrapper">
 							<div class="week-title">Week <span id="week">-</span></div>
@@ -86,7 +133,7 @@
 
      </div>
    </div>
- </div>
+ </div>-->
 
 </div>
 
