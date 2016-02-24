@@ -263,6 +263,7 @@ ul.alternatives {
 	cursor: pointer;
 }
 ul.alternatives li {
+	background: #374452;
 	display: inline-block;
 	border-right: 2px solid #5398c3;
 	padding: 10px;
@@ -272,7 +273,7 @@ ul.alternatives li {
 	color: #fff;
 }
 .active-tab {
-	background: #5398c3;
+	background: #5398c3 !important;
 }
 .mid {
 }
