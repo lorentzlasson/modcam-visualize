@@ -95,6 +95,8 @@ section#ble h3 {
 	padding: 10px;
 	color: #fff;
 	width: 100%;
+	text-align: center;
+	text-indent: -25px;
 }
 .sec-number {
 	color: #3f5368;
@@ -246,7 +248,39 @@ ul.days-data li:last-child {
 	font-size: 24px;
 	color: #fff;
 }
-
+.demographics {
+	margin-top: -60px;
+	margin-bottom: 50px;
+}
+ul.alternatives {
+	border: 2px solid #5398c3;
+	padding: 0 0 0 10px;
+	max-width: 485px;
+	text-align: center;
+	overflow: hidden;
+	border-radius: 4px;
+	text-indent: -15px;
+}
+ul.alternatives li {
+	display: inline-block;
+	border-right: 2px solid #5398c3;
+	padding: 10px;
+	margin-bottom: 0;
+	text-align: center;
+	width: 163px;
+	color: #fff;
+}
+.active-tab {
+	background: #5398c3;
+}
+.mid {
+}
+.no-border {
+	border-right: none !important;
+}
+.highcharts-tooltip h3 {
+    margin: 0.3em 0;
+}
 /* TOOLTIP */
 
 [data-tooltip] {
