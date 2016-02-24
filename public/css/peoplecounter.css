@@ -260,6 +260,7 @@ ul.alternatives {
 	overflow: hidden;
 	border-radius: 4px;
 	text-indent: -15px;
+	cursor: pointer;
 }
 ul.alternatives li {
 	display: inline-block;

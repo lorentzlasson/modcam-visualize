@@ -334,6 +334,25 @@ function socketOnError(){
 		console.log("tried connecting to socket to many times")
 	}
 }
+function activateSelectionBar(){
+	$('#all').addClass('active-tab');
+
+     $('#women').click(function () { 
+		 $('#all').removeClass('active-tab');
+		 $('#men').removeClass('active-tab');
+		 $('#women').addClass('active-tab');
+    });
+    $('#men').click(function () { 
+		 $('#all').removeClass('active-tab');
+		 $('#women').removeClass('active-tab');
+		 $('#men').addClass('active-tab');
+    });
+    $('#all').click(function () { 
+		 $('#men').removeClass('active-tab');
+		 $('#women').removeClass('active-tab');
+		 $('#all').addClass('active-tab');
+    });
+}
 
 
 var countMap = {}
@@ -347,6 +366,7 @@ var colors = ['none']
 
 
 $(document).ready(function(){
+	activateSelectionBar(); 
 	createDatepicker()
 	connectSocket()
 	$('#week').html(currentDate.getWeek())
