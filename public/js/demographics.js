@@ -135,7 +135,8 @@ function createAllChart(){
 	allChart = new Highcharts.Chart({
 		chart: {
 			renderTo: 'container',
-			type: 'bubble'
+			type: 'bubble',
+            zoomType: 'xy'
 		},
 		tooltip: {
             formatter: function () {
@@ -151,6 +152,7 @@ function createAllChart(){
 	        tickInterval: 3600 * 1000,
 	        min: Date.UTC(selectedDate.getUTCFullYear(), selectedDate.getUTCMonth(), selectedDate.getUTCDate()+1),
 	        max: Date.UTC(selectedDate.getUTCFullYear(), selectedDate.getUTCMonth(), selectedDate.getUTCDate()+2),
+	        gridLineWidth: 1
 		},
 		yAxis: {
 			title: {
