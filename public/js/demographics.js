@@ -157,7 +157,7 @@ function createAllChart(){
 				text: 'Age'
 			}
 		},
-		series:[{name: 'Men', color: '#ffc04c',}, {name: 'Women', color: '#a64ca6',}]
+		series:[{name: 'Men', color: '#ffa500',}, {name: 'Women', color: '#a64ca6',}]
 	})	
 }
 
