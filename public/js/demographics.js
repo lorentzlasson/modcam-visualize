@@ -356,6 +356,7 @@ function getAllMen(){
 }
 
 function update(){
+	createAllChart()
 	updateWomenCharts()
 	updateWomenWidgets()
 	updateMostOfAge()
