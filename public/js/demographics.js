@@ -15,9 +15,9 @@ var selectedGender = 'all'
 var selectedHour = '12'
 
 var selectedDate = new Date(today)
-selectedDate.setDate(23)
 
 $(document).ready(function(){
+	createDatepicker()
 	$('#men').on('click', function(){
 		showMen()
 		selectedGender = 'men'
@@ -40,17 +40,19 @@ $(document).ready(function(){
 	})
 
 	$('#hour-picker').change(function(){
-		console.log('change')
 		var v = $('#hour-picker option:selected').val()
-		console.log(v)
 		selectedHour = v
 		updatePieChart()
 	})
 
 	createCharts()
+	refreshData()
+})
+
+function refreshData(){
 	getAllMen()
 	getAllWomen()
-})
+}
 
 function setSelected(sel){
 	$('#men, #women, #all').removeClass('active-tab')
@@ -240,7 +242,6 @@ function groupAges(time){
 	}
 
 	if (selectedGender != 'women'){
-		console.log('men')
 		for (var i in allMen){
 			var m = allMen[i]
 			var k = m.key
@@ -254,7 +255,6 @@ function groupAges(time){
 	}
 	
 	if (selectedGender != 'men'){
-		console.log('women')
 		for (var i in allWomen){
 			var m = allWomen[i]
 			var k = m.key
@@ -293,11 +293,15 @@ function updateWomenCharts(){
 }
 
 function getAllWomen(){
-	var doc = 'all_women?reduce=true&group_level=5'
+	var startKey = JSON.stringify(getStartKey())
+	var endKey = JSON.stringify(getEndKey())
+
+	var doc = 'all_women?start_key=' + startKey+ '&end_key=' + endKey +'&reduce=true&group_level=5'
 	$.getJSON(db+doc, function(data){
 		if (data.rows){
 			resCount++
 			allWomen = data.rows
+			console.log(allMen)
 			if (resCount == 2){
 				resCount = 0
 				update()
@@ -306,12 +310,42 @@ function getAllWomen(){
 	})
 }
 
+function getPaddedDate(n){
+	return n > 9 ? n.toString() : '0' + n
+}
+
+function getStartKey(){
+	var key = []
+	key.push(selectedDate.getUTCFullYear().toString())
+	key.push(getPaddedDate(selectedDate.getMonth()+1))
+	key.push(selectedDate.getDate().toString())
+	key.push((0).toString())
+	key.push(0)
+
+	return key
+}
+
+function getEndKey(){
+	var key = []
+	key.push(selectedDate.getUTCFullYear().toString())
+	key.push(getPaddedDate(selectedDate.getMonth()+1))
+	key.push(selectedDate.getDate().toString())
+	key.push((23).toString())
+	key.push({})
+
+	return key
+}
+
 function getAllMen(){
-	var doc = 'all_men?reduce=true&group_level=5'
+	var startKey = JSON.stringify(getStartKey())
+	var endKey = JSON.stringify(getEndKey())
+
+	var doc = 'all_men?start_key=' + startKey+ '&end_key=' + endKey +'&reduce=true&group_level=5'
 	$.getJSON(db+doc, function(data){
 		if (data.rows){
 			resCount++
 			allMen = data.rows
+			console.log(allMen)
 
 			if (resCount == 2){
 				resCount = 0
@@ -337,6 +371,17 @@ function updatePieChart(){
 	for (var i in categories){
 		setData.push([categories[i], ages[i]])
 	}
-	console.log(setData)
 	pieChart.series[0].setData(setData)
+}
+
+function createDatepicker(){
+	$('#datepicker').datepicker({
+		dateFormat:	'dd/mm/y',
+		onClose: function(){
+			selectedDate = $('#datepicker').datepicker('getDate')
+			refreshData()
+			console.log(selectedDate)
+		}
+	})
+	$('#datepicker').datepicker('setDate', today)
 }
