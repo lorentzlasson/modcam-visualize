@@ -19,7 +19,6 @@ header {
 }
 section#in-out {
 	background: #fff;
-	max-width: 500px;
 	border-radius: 4px;
 
 }
@@ -249,13 +248,15 @@ ul.days-data li:last-child {
 	color: #fff;
 }
 .demographics {
+	overflow: hidden;
 	margin-top: -60px;
-	margin-bottom: 50px;
+}
+#container-two {
+	position: relative;
 }
 ul.alternatives {
 	border: 2px solid #5398c3;
 	padding: 0 0 0 10px;
-	max-width: 485px;
 	text-align: center;
 	overflow: hidden;
 	border-radius: 4px;
@@ -282,6 +283,9 @@ ul.alternatives li {
 }
 .highcharts-tooltip h3 {
     margin: 0.3em 0;
+}
+#hour-picker {
+	width: 200px;
 }
 /* TOOLTIP */
 
