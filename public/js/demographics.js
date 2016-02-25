@@ -6,6 +6,7 @@ var allWomen = []
 var db = 'https://2ed64fa0-abba-4d60-8437-62d7bcad30af-bluemix.cloudant.com/demographicdb/_design/data/_view/'
 var categories = ['0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100']
 var today = new Date()
+var totalVisits = 0
 today.setHours(0)
 today.setMinutes(0)
 today.setSeconds(0)
@@ -52,6 +53,7 @@ $(document).ready(function(){
 function refreshData(){
 	getAllMen()
 	getAllWomen()
+	
 }
 
 function setSelected(sel){
@@ -95,6 +97,11 @@ function createPieChart(){
                 showInLegend: true
             }
         },
+        tooltip: {
+            formatter: function () {
+                return this.y
+            }
+        },
 		series: [
 			{
 				name: 'Ages', 
@@ -102,7 +109,7 @@ function createPieChart(){
 				dataLabels: {
 				  formatter:function() {
 				    if(this.y != 0) {
-				      return this.y;
+				      return 'Count: ' + this.y + ' of ' + totalVisits + '<br>Percent: ' + ((this.y / totalVisits) *100).toFixed(2) + ' %';
 				    }
 				  }
 				},
@@ -150,7 +157,7 @@ function createAllChart(){
 				text: 'Age'
 			}
 		},
-		series:[{name: 'Men'}, {name: 'Women'}]
+		series:[{name: 'Men', color: '#ffc04c',}, {name: 'Women', color: '#a64ca6',}]
 	})	
 }
 
@@ -279,7 +286,7 @@ function updateMostOfAge(){
 	var total = totalVisit()
 	if (most){
 		var percent = most.value / total
-		$('#most-age').html('Age: ' + most.age + ' | ' + (percent*100) + ' % of total visitors')
+		$('#most-age').html('Age: ' + most.age + ' | ' + (percent*100).toFixed(2) + ' % of total visitors')
 	} else {
 		$('#most-age').html(' - | - ')
 	}
@@ -361,6 +368,7 @@ function getAllMen(){
 }
 
 function update(){
+	totalVisits = totalVisit()
 	createAllChart()
 	updateWomenCharts()
 	updateWomenWidgets()
