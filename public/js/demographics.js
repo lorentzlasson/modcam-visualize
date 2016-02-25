@@ -2,6 +2,14 @@ var allChart = undefined
 var allMen = []
 var allWomen = []
 var db = 'https://2ed64fa0-abba-4d60-8437-62d7bcad30af-bluemix.cloudant.com/demographicdb/_design/data/_view/'
+var today = new Date()
+today.setHours(0)
+today.setMinutes(0)
+today.setSeconds(0)
+today.setMilliseconds(0)
+
+var selectedDate = new Date(today)
+selectedDate.setDate(23)
 
 $(document).ready(function(){
 	$('#men').on('click', function(){
@@ -39,11 +47,12 @@ function mapData(arr, data){
 	for (var i in data){
 		var m = data[i]
 		var d = {
-			x: parseInt(m.key[3]),
+			x: Date.UTC(m.key[0], (parseInt(m.key[1])-1), m.key[2], m.key[3]),
 			y: parseInt(m.key[4]),
 			z: m.value
 		}
 		arr.push(d)
+		console.log(Date.UTC(m.key[0], (parseInt(m.key[1])-1), m.key[2], m.key[3]))
 	}
 }
 
@@ -58,9 +67,10 @@ function createAllChart(){
 		},
 		xAxis: {
 			text: 'Hour',
-			gridLineWidth: 1,
-			min: 0,
-			max: 24
+			type: 'datetime',
+	        tickInterval: 3600 * 1000,
+	        min: Date.UTC(selectedDate.getUTCFullYear(), selectedDate.getUTCMonth(), selectedDate.getUTCDate()+1),
+	        max: Date.UTC(selectedDate.getUTCFullYear(), selectedDate.getUTCMonth(), selectedDate.getUTCDate()+2),
 		},
 		yAxis: {
 			title: {
