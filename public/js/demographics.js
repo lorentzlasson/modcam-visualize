@@ -130,6 +130,11 @@ function createAllChart(){
 			renderTo: 'container',
 			type: 'bubble'
 		},
+		tooltip: {
+            formatter: function () {
+                return 'Time: ' + new Date(this.x).getHours() + ':00<br>Age: ' + this.y + ' years<br>Count: ' + this.point.z;
+            }
+        },
 		title: {
 			text: ''
 		},
