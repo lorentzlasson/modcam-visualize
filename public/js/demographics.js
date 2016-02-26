@@ -150,8 +150,8 @@ function createAllChart(){
 			text: 'Hour',
 			type: 'datetime',
 	        tickInterval: 3600 * 1000,
-	        min: Date.UTC(selectedDate.getUTCFullYear(), selectedDate.getUTCMonth(), selectedDate.getUTCDate()+1),
-	        max: Date.UTC(selectedDate.getUTCFullYear(), selectedDate.getUTCMonth(), selectedDate.getUTCDate()+2),
+	        min: Date.UTC(selectedDate.getUTCFullYear(), selectedDate.getUTCMonth(), selectedDate.getUTCDate()+1, 9),
+	        max: Date.UTC(selectedDate.getUTCFullYear(), selectedDate.getUTCMonth(), selectedDate.getUTCDate()+1, 19),
 	        gridLineWidth: 1
 		},
 		yAxis: {
