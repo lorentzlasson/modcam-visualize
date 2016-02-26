@@ -66,7 +66,9 @@ function createCharts(){
 	createPieChart()
 }
 
-function mapData(arr, data){
+function mapData(data){
+	var arr = []
+
 	for (var i in data){
 		var m = data[i]
 		var d = {
@@ -76,6 +78,28 @@ function mapData(arr, data){
 		}
 		arr.push(d)
 	}
+
+	var result = {}
+	for (var i in arr){
+		result[arr[i].y+ ',' +arr[i].x] = 0
+	}
+
+	for (var i in arr){
+		result[arr[i].y+ ',' +arr[i].x] += arr[i].z
+	}
+
+	var retResult = []
+	for (var i in result){
+		var key = i.split(',')
+		var d = {
+			x: parseInt(key[1]),
+			y: parseInt(key[0]),
+			z: result[i]
+		}
+		retResult.push(d)
+	}
+
+	return retResult
 }
 
 function createPieChart(){
@@ -181,7 +205,7 @@ function showMen(){
 function updateMenWigets(){
 	var most = findMost(allMen)
 	if (most){
-		$('#most-men').html(most.key[3] + ':00 | ' + most.value + ' ' + (most.value < 2 ? 'man' : 'men'))
+		$('#most-men').html(most.key + ':00 | ' + most.value + ' ' + (most.value < 2 ? 'man' : 'men'))
 	} else {
 		$('#most-men').html(' - | - ')
 	}
@@ -192,7 +216,7 @@ function updateMenWigets(){
 function updateWomenWidgets(){
 	var most = findMost(allWomen)
 	if (most){
-		$('#most-women').html(most.key[3] + ':00 | ' + most.value + ' ' + (most.value < 2 ? 'woman' : 'women'))
+		$('#most-women').html(most.key + ':00 | ' + most.value + ' ' + (most.value < 2 ? 'woman' : 'women'))
 	} else {
 		$('#most-women').html(' - | - ')
 	}
@@ -201,9 +225,26 @@ function updateWomenWidgets(){
 
 function findMost(data){
 	var most = undefined
+	mostMap = {}
+	
 	for (var i in data){
-		if (!most || most.value < data[i].value){
-			most = data[i]
+		var d = data[i]
+		var k = d.key[3]
+		mostMap[k] = 0
+	}
+
+	for (var i in data){
+		var d  = data[i]
+		var k = d.key[3]
+		mostMap[k] += d.value
+	}
+
+	for (var i in mostMap){
+		if (!most || most.value < mostMap[i]){
+			most = {
+				key: i,
+				value: mostMap[i]
+			}
 		}
 	}
 
@@ -228,16 +269,26 @@ function findMostOfAges(){
 	var most = undefined
 
 	for (var i in allMen){
+		ageMap[Math.floor(allMen[i].key[4]/10) * 10] = 0
+	}
+
+	for (var i in allWomen){
+		ageMap[Math.floor(allWomen[i].key[4]/10) * 10] = 0
+	}
+
+	for (var i in allMen){
 		var d = allMen[i]
 		var k = d.key[4]
-		ageMap[k] = ageMap[k] + d.value || d.value
+		ageMap[Math.floor(allMen[i].key[4]/10) * 10] = ageMap[Math.floor(allMen[i].key[4]/10) * 10] + d.value
 	}
 
 	for (var i in allWomen){
 		var d = allWomen[i]
 		var k = d.key[4]
-		ageMap[k] = ageMap[k] + d.value || d.value
+		ageMap[Math.floor(allWomen[i].key[4]/10) * 10] = ageMap[Math.floor(allWomen[i].key[4]/10) * 10] + d.value
 	}
+
+	
 
 	for (var i in ageMap){
 		if (!most || most.value < ageMap[i]){
@@ -295,14 +346,12 @@ function updateMostOfAge(){
 }	
 
 function updateMenCharts(){
-	var d = []
-	mapData(d, allMen)
+	var d = mapData(allMen)
 	allChart.series[0].setData(d)
 }
 
 function updateWomenCharts(){
-	var d = []
-	mapData(d, allWomen)
+	var d = mapData(allWomen)
 	allChart.series[1].setData(d)
 }
 
@@ -315,7 +364,6 @@ function getAllWomen(){
 		if (data.rows){
 			resCount++
 			allWomen = data.rows
-			console.log(allMen)
 			if (resCount == 2){
 				resCount = 0
 				update()
@@ -359,7 +407,6 @@ function getAllMen(){
 		if (data.rows){
 			resCount++
 			allMen = data.rows
-			console.log(allMen)
 
 			if (resCount == 2){
 				resCount = 0
@@ -396,7 +443,6 @@ function createDatepicker(){
 		onClose: function(){
 			selectedDate = $('#datepicker').datepicker('getDate')
 			refreshData()
-			console.log(selectedDate)
 		}
 	})
 	$('#datepicker').datepicker('setDate', today)
