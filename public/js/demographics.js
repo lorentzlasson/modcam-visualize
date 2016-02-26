@@ -71,7 +71,7 @@ function mapData(arr, data){
 		var m = data[i]
 		var d = {
 			x: Date.UTC(m.key[0], (parseInt(m.key[1])-1), m.key[2], m.key[3]),
-			y: parseInt(Math.floor(m.key[4] / 10)),
+			y: parseInt(Math.floor(m.key[4] / 10) * 10),
 			z: m.value
 		}
 		arr.push(d)
