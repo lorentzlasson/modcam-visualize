@@ -286,6 +286,9 @@ ul.alternatives li {
 #hour-picker {
 	width: 200px;
 }
+.row-under {
+	margin-top: 30px;
+}
 /* TOOLTIP */
 
 [data-tooltip] {
