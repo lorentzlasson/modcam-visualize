@@ -204,6 +204,9 @@ ul {
 ul.days-data {
 	margin-top: -45px;
 }
+ul.days-data, ul.days-text {
+	margin-left: 45px;
+}
 ul.days-text li {
 	width: 36px;
 	height: 36px;
@@ -241,11 +244,12 @@ ul.days-data li:last-child {
 .weekly-indicator {
 	position: relative;
 	left: -25px;
-	margin-top: -60px;
+	margin-top: -10px;
 }
 .week-title {
 	font-size: 24px;
 	color: #fff;
+	margin-left: 30px;
 }
 .demographics {
 	overflow: hidden;
