@@ -254,6 +254,14 @@ ul.days-data li:last-child {
 .demographics {
 	overflow: hidden;
 }
+.dwelltime {
+	overflow: hidden;
+}
+#container {
+	background:  url(../images/floorplan.png) no-repeat !important;
+	position: relative;
+	left: -8px;
+}
 #container-two {
 	position: relative;
 }
