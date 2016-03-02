@@ -1,0 +1,80 @@
+body {
+}
+.filters input, .filters select, .filters textarea {
+	width: 100%;
+}
+/***** EXTERNAL ********/
+
+#container {
+    margin: 0 auto;
+}
+
+#container input {
+	height: 2.5em;
+	visibility: hidden;
+}
+
+#container label {
+	background: #f9f9f9;  
+	border-radius: .25em .25em 0 0;
+	color: #888;  
+	cursor: pointer;
+	display: block;
+	float: left;
+	font-size: 1em;  
+	height: 2.5em;
+	line-height: 2.5em;
+	margin-right: .25em;
+	padding: 0 1.5em;
+	text-align: center;
+}
+
+#container input:hover + label {
+	background: #ddd;  
+	color: #666;  
+}
+
+#container input:checked + label {
+	background: #f1f1f1;  
+	color: #444; 
+	position: relative;
+	z-index: 6;
+	/*
+	-webkit-transition: .1s;
+	-moz-transition: .1s;
+	-o-transition: .1s;
+	-ms-transition: .1s;
+	*/
+}
+
+#content {
+	background: #f1f1f1;  
+	border-radius: 0 .25em .25em .25em;
+	min-height: 100px;  
+	position: relative;
+	top: -7px;
+	width: 100%;
+	z-index: 5;
+}
+
+#content div {
+	opacity: 0;
+	padding: 1.5em;
+	position: absolute;
+	z-index: -100;
+	/*
+	transition: all linear 0.1s;
+	*/
+}
+
+#container input#tab-1:checked ~ #content #content-1,
+#container input#tab-2:checked ~ #content #content-2,
+#container input#tab-3:checked ~ #content #content-3,
+#container input#tab-4:checked ~ #content #content-4 {
+    opacity: 1;
+    z-index: 100;
+}
+
+input.visible {
+  visibility: visible !important;
+}

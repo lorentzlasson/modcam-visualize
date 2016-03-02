@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>People Counter | Event Handler</title>
+	<link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+	<link rel="stylesheet" href="css/eventhandler.css">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="eight columns">
+				<h3>Event handler</h3>
+			</div>
+			<div class="four columns">
+				
+			</div>
+		</div>
+		<div class="row">
+			<div class="eight columns">
+				&nbsp;
+			</div>
+			<div class="four columns filters">
+				<label for="area">Area:</label>
+				<select name="area" id="area">
+					<option value="">1</option>
+					<option value="">2</option>
+				</select>
+				<label for="event">Event:</label>
+				<select name="event" id="event">
+					<option value="dwell">Dwell</option>
+					<option value="limit">Limit</option>
+					<option value="in">In</option>
+					<option value="out">Out</option>
+				</select>
+				<br>
+				<input type="text" placeholder="Time that people are standing at same place" id="dwell" hidden>
+				<input type="text" placeholder="Limit" id="limit" hidden>
+				<input type="number" placeholder="Amount that should enter the area" id="in" hidden>
+				<input type="number" placeholder="Amount that should exit the area" id="out" hidden>
+				<label for="event-action">Event action:</label>
+				<select name="event-action" id="">
+					<option value=""></option>
+				</select>
+				<br>
+				<input type="text" placeholder="">
+				<textarea name="" id="" cols="30" rows="10"></textarea>
+				<label for="day">Day:</label>
+				<select name="day" id="">
+					<option value=""></option>
+				</select>
+				<br>
+				<div class="button">Hello</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="twelve columns">
+				<div id="container">
+					<input id="tab-1" type="radio" name="tab-group" checked="checked" />
+					<label for="tab-1">Dwell</label>
+			
+					<input id="tab-2" type="radio" name="tab-group" />
+					<label for="tab-2">Limit</label>
+			
+					<input id="tab-3" type="radio" name="tab-group" />
+					<label for="tab-3">In</label>
+
+					<input id="tab-4" type="radio" name="tab-group" />
+					<label for="tab-4">Out</label>
+
+					<div id="content">
+						<div id="content-1">
+							content 1
+						</div>
+						<div id="content-2">
+							content 2
+						</div>
+
+						<div id="content-3">
+							content 3
+						</div>
+						<div id="content-4">
+							content 4
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+		<script src="js/eventhandler.js" type="text/javascript"></script>
+	</body>
+	</html>
