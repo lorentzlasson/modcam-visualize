@@ -20,6 +20,13 @@ function eventDropdown(){
 	});
 }
 
+//Populate event-action text field
+
+$('#event-action').on('change', function() {
+    var placeholder = $(this).find(':selected').data('placeholder');
+    $('#event-actionInput').attr('placeholder', placeholder);
+});
+
 function socketOnOpen(){
 	console.log('Websocket open')
 	if (hadConnection) return;
@@ -55,6 +62,8 @@ function socketOnMessage(evt){
 	}
 }
 
+
+
 function socketOnClose(){
 	console.log('Websocket close')
 	if (3 > connectFails++){
@@ -76,3 +85,4 @@ function connectSocket(){
 		console.log('Failed to connect websocket')
 	}
 }
+

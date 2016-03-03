@@ -46,6 +46,7 @@ body {
 	color: #666;
 }
 
+
 #container input:checked + label {
 	background: #f1f1f1;
 	color: #444;
@@ -80,8 +81,14 @@ body {
 	transition: all linear 0.1s;
 	*/
 }
+<<<<<<< Updated upstream
 .right {
 	float: right;
+=======
+.button {
+	color: blue;
+	background-color: green;
+>>>>>>> Stashed changes
 }
 #container input#tab-1:checked ~ #content #content-1,
 #container input#tab-2:checked ~ #content #content-2,

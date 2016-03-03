@@ -22,6 +22,7 @@
 				&nbsp;
 			</div>
 			<div class="four columns filters">
+
 				<label for="area">Area:</label>
 				<select name="area" id="area">
 					<option value="">1</option>
@@ -36,22 +37,35 @@
 				</select>
 				<br>
 				<input type="number" placeholder="Time that people are standing at same place" id="dwell" hidden>
-				<input type="number" placeholder="Limit" id="limit" hidden>
+				<input type="number" placeholder="Number of people in the area" id="limit" hidden>
 				<input type="number" placeholder="Amount that should enter the area" id="in" hidden>
 				<input type="number" placeholder="Amount that should exit the area" id="out" hidden>
-				<label for="event-action">Event action:</label>
-				<select name="event-action" id="">
-					<option value=""></option>
+				
+				<label for="eventAction">Event action:</label>
+				<select name="event-action" id="event-action">
+				    <option data-placeholder="Telephone number" value="0">Sms</option>
+   					 <option data-placeholder="Twitter feed"  value="1">Twitter</option>
+					</select>
+						<input id="event-actionInput" placeholder="Telephone number" type="text"> 
 				</select>
 				<br>
-				<input type="text" placeholder="">
-				<textarea name="" id="" cols="30" rows="10"></textarea>
+				
+				
+
+				<textarea name="" id="" placeholder="Type message here" cols="30" rows="10"></textarea>
 				<label for="day">Day:</label>
 				<select name="day" id="">
-					<option value=""></option>
+					<option value="Monday">Monday</option>
+					<option value="Tuesday">Tuesday</option>
+					<option value="Wednesday">Wednesday</option>
+					<option value="Thursday">Thursday</option>
+					<option value="Friday">Friday</option>
+					<option value="Saturday">Saturday</option>
+					<option value="Sunday">Sunday</option>
 				</select>
 				<br>
-				<div class="button">Hello</div>
+				
+				<div class="button">Save changes</div>
 			</div>
 		</div>
 		<div class="row">
