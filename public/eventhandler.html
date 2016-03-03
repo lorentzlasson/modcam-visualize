@@ -32,24 +32,24 @@
 					<option value="out">Out</option>
 				</select>
 				<br>
-				<input type="number" placeholder="Minutes that people are standing in the zone" id="dwell" hidden>
-				<input type="number" placeholder="Amount that is in the zone at the same time" id="limit" hidden>
+				<input type="number" placeholder="Minutes that people are standing in the zone" id="dwell" class="dwell-minutes">
+				<input type="number" placeholder="Amount that is in the zone at the same time" id="limit" hidden class="limit-count">
 				<label for="event-action">Event action:</label>
 				<select name="event-action" id="event-action">
 					<option value="sms">SMS</option>
 					<option value="twitter">Twitter</option>
 				</select>
 				<br>
-				<div id="sms" hidden>
-					<input type="number" placeholder="Enter a phonenumber">
-					<textarea name="" id="" placeholder="Enter the message that should be sent"></textarea>
+				<div id="sms">
+					<input type="text" placeholder="Enter a phonenumber" id="sms-number">
+					<textarea name="" id="sms-message" placeholder="Enter the message that should be sent"></textarea>
 				</div>
 				<div id="twitter" hidden>
-					<input type="number" placeholder="Enter hashtag that you want to use">
-					<textarea name="" id="" placeholder="Enter the message that should be published"></textarea>
+					<input type="text" placeholder="Enter hashtag that you want to use" id="hashtag">
+					<textarea name="" placeholder="Enter the message that should be published" id="twitter-message"></textarea>
 				</div>
 				<label for="day">Day:</label>
-				<select name="day" id="">
+				<select name="day" id="event-day">
 					<option value="mon">Monday</option>
 					<option value="tue">Tuesday</option>
 					<option value="wed">Wednesday</option>
@@ -59,7 +59,7 @@
 					<option value="sun">Sunday</option>
 				</select>
 				<br>
-				<div class="button">Publish event</div>
+				<div class="button" id="add-event-btn">Publish event</div>
 			</div>
 		</div>
 		<div class="row">
@@ -151,6 +151,7 @@
 								<thead>
 									<tr class="table-header">
 										<th>Area</th>
+										<th>Type</th>
 										<th>Day</th>
 										<th>Action</th>
 										<th>Other</th>

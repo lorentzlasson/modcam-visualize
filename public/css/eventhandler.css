@@ -101,6 +101,7 @@ td:last-child {
 	color: #fff;
 	border-radius: 4px;
 	padding: 5px 10px 5px 10px;
+	cursor: pointer;
 }
 #content {
 	background: #f1f1f1;
