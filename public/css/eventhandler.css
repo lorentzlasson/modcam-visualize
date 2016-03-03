@@ -90,14 +90,17 @@ body {
 table {
 	border-collapse: collapse;
 }
-tr th:first-child {
-	padding-left: 10px !important;
+tr th:first-child, tr td:first-child {
+	padding-left: 10px;
 }
 td:last-child {
 	border-bottom: none;
 }
 .close {
-	
+	background: #bf4e4e;
+	color: #fff;
+	border-radius: 4px;
+	padding: 5px 10px 5px 10px;
 }
 #content {
 	background: #f1f1f1;

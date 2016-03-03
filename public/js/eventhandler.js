@@ -5,6 +5,7 @@ var hadConnection = false;
 
 $(document).ready(function(){
 	eventDropdown();
+	eventActionDropdown()
 	connectSocket();
 });
 function showAndHide(array, value){
@@ -19,7 +20,12 @@ function eventDropdown(){
 		showAndHide(options, this.value);
 	});
 }
-
+function eventActionDropdown(){
+	$('#event-action').on('change', function() {
+		var options = ['sms', 'twitter'];
+		showAndHide(options, this.value);
+	});
+}
 function socketOnOpen(){
 	console.log('Websocket open')
 	if (hadConnection) return;
