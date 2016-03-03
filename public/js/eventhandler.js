@@ -34,23 +34,23 @@ function socketOnMessage(evt){
 	if (data.res == "get"){
 		console.log("get");
 		$.each(data.events.dwell, function(key, val){
-				$('#table-in tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.time +'</td><td>'+ val.action +'</td><td><span>X</span></td></tr>');
+				$('#table-in tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.time +'</td><td>'+ val.action +'</td><td><span class="close">x</span></td></tr>');
 		});
 		$.each(data.events.limit, function(key, val){
-				$('#table-limit tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.limit +'</td><td>'+ val.action +'</td><td><span>X</span></td></tr>');
+				$('#table-limit tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.limit +'</td><td>'+ val.action +'</td><td><span class="close">x</span></td></tr>');
 		});
 		$.each(data.events.in, function(key, val){
-				$('#table-in tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.action +'</td><td><span>X</span></td></tr>');
+				$('#table-in tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.action +'</td><td><span class="close">x</span></td></tr>');
 		});
 		$.each(data.events.out, function(key, val){
-				$('#table-in tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.action +'</td><td><span>X</span></td></tr>');
+				$('#table-in tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.action +'</td><td><span class="close">x</span></td></tr>');
 		});
 
 	}
 	else if (data.res == "live"){
 		console.log(data);
 		$.each(data.result, function(key, val){
-			$('#table-log tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.action +'</td><td><span>X</span></td></tr>');
+			$('#table-log tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.action +'</td><td><span class="close">x</span></td></tr>');
 		});
 	}
 }
