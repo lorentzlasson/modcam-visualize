@@ -2,7 +2,10 @@ var socketAdr = 'ws://dwell-node-red.mybluemix.net/ws/events'
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 var socket = undefined;
 var hadConnection = false;
+var allChart
+var rects = []
 var settingsDoc = undefined
+var areaOne, areaTwo
 
 $(document).ready(function(){
 	eventDropdown();
@@ -11,8 +14,89 @@ $(document).ready(function(){
 	removeRow()
 	addEvent()
 	showAndHide()
+	createChart()
 
 });
+
+function createChart(){
+	allChart = new Highcharts.Chart({
+		 credits: false,
+		chart: {
+			renderTo: 'container',
+			type: 'bubble',
+            zoomType: 'xy',
+            backgroundColor: null,
+
+		},
+		tooltip: {
+            formatter: function () {
+                return 'Time: ' + new Date(this.x).getHours() + ':00<br>Age: ' + this.y + ' years<br>Count: ' + this.point.z;
+            }
+        },
+		title: {
+			text: ''
+		},
+		xAxis: {
+	        gridLineWidth: 0,
+			lineWidth: 0,
+			minorGridLineWidth: 0,
+			lineColor: 'transparent',    
+			labels: {
+			   enabled: false
+			},
+			minorTickLength: 0,
+			tickLength: 0,
+			min: 0,
+			max: 100
+		},
+		yAxis: {
+			title: {
+				text: ''
+			},
+			labels: {
+				enabled: false
+			},
+			gridLineColor: 'transparent',
+			min: 0,
+			max: 100
+		},
+		plotOptions:{
+                series:{
+                    allowPointSelect: true,
+                    point: {
+                        events:{
+                            select: function(e) {
+                            	console.log(this);
+                            }
+                        }                        
+                    }
+                }
+        },
+		series:[{name: 'Area One', color: '#ffa500',}, {name: 'Area Two', color: '#a64ca6',}]
+	})
+
+	//allChart.series[0].setData([{x: 25, y: 40, z: 120}])
+	//allChart.series[1].setData([{x: 75, y: 65, z: 120}])
+	areaOne = allChart.renderer.rect(147, 50, 100, 260)
+            .attr({
+            fill: '#ffa500',
+            'fill-opacity': 0.3,
+            stroke: 'black',
+            'stroke-width': 3
+        })
+    areaOne.add();
+
+    areaTwo = allChart.renderer.rect(423, 150, 45, 150)
+            .attr({
+            fill: '#a64ca6',
+            'fill-opacity': 0.3,
+            stroke: 'black',
+            'stroke-width': 3
+        })
+    areaTwo.add();
+}
+
+
 
 function clearTables(){
 	$('#table-dwell tr').slice(1).remove()
@@ -226,6 +310,15 @@ function socketOnMessage(evt){
 		if (val1.type == 'limit'){
 			other = 'limit of ' + val.limit 
 		}
+
+		setTimeout(function(){
+			$(areaOne.element).attr({
+			'fill-opacity': 0.3
+			})
+		}, 2000)
+		$(areaOne.element).attr({
+			'fill-opacity': 1.0
+		})
 
 
 		$('#table-log tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val1.type +'</td><td>'+ days[new Date(val1.timestamp).getDay()] +'</td><td>'+ val.action +'</td><td>' + other + '</td><td><span class="close">x</span></td></tr>');

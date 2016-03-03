@@ -72,6 +72,11 @@ body {
 	-ms-transition: .1s;
 	*/
 }
+#container {
+	background:  url(../images/floorplan.png) no-repeat !important;
+	position: relative;
+	left: -8px;
+}
 .button {
 	background: #4e99bf !important;
 	color: #274b5d !important;
@@ -138,4 +143,8 @@ td:last-child {
 
 input.visible {
   visibility: visible !important;
+}
+
+.rectHover {
+	fill: green;
 }
