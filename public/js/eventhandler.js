@@ -1,7 +1,6 @@
 var socketAdr = 'ws://dwell-node-red.mybluemix.net/ws/events'
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 var socket = undefined;
-var connectFails = 0;
 var hadConnection = false;
 var settingsDoc = undefined
 
@@ -194,7 +193,6 @@ function socketOnOpen(){
 	console.log('Websocket open')
 	if (hadConnection) return;
 	hadConnection = true;
-	connectFails = 0;
 	var eventRequest = JSON.stringify({req: "get"})
 	socket.send(eventRequest)
 }
@@ -239,11 +237,7 @@ function socketOnMessage(evt){
 
 function socketOnClose(){
 	console.log('Websocket close')
-	if (3 > connectFails++){
-		connectSocket()
-	} else {
-		console.log("Tried connecting to socket to many times")
-	}
+	connectSocket()
 }
 
 function connectSocket(){
