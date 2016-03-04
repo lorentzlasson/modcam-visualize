@@ -129,6 +129,11 @@ function addEvent(){
 		settings = jQuery.extend(true, {}, settingsDoc)
 		settings.events[options.event].push(options)
 		saveDocument(settings, options)
+
+		$('#notifier').fadeIn()
+		setTimeout(function(){
+			$('#notifier').fadeOut()
+		},2000)
 	})
 }
 
