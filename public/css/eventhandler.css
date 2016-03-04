@@ -3,6 +3,8 @@ body {
 }
 .logo {
 	color: #fff;
+	padding: 20px;
+	padding-left: 0;
 }
 .filters {
 	background: #2b333c;
@@ -10,7 +12,19 @@ body {
 	border-radius: 4px;
 	padding: 15px;
 }
+section#in-out {
+	background: #fff;
+	border-radius: 4px;
 
+}
+section#in-out h3 {
+	font-size: 24px !important; 
+	background: #2b333c;
+	text-indent: 15px;
+	padding: 20px;
+	font-weight: 400 !important;
+	color: #d7dfe4;
+}
 .filters input, .filters select, .filters textarea {
 	width: 100%;
 }
@@ -72,7 +86,7 @@ body {
 	-ms-transition: .1s;
 	*/
 }
-#container {
+#container2 {
 	background:  url(../images/floorplan.png) no-repeat !important;
 	position: relative;
 	left: -8px;

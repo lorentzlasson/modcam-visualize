@@ -15,14 +15,13 @@ $(document).ready(function(){
 	addEvent()
 	showAndHide()
 	createChart()
-
 });
 
 function createChart(){
 	allChart = new Highcharts.Chart({
 		 credits: false,
 		chart: {
-			renderTo: 'container',
+			renderTo: 'container2',
 			type: 'bubble',
             zoomType: 'xy',
             backgroundColor: null,
