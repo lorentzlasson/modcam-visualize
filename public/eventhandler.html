@@ -10,11 +10,8 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="eight columns">
-				<h3>Event handler</h3>
-			</div>
-			<div class="four columns">
-
+			<div class="twelve columns">
+				<h3 class="logo">Event handler</h3>
 			</div>
 		</div>
 		<div class="row">
@@ -36,6 +33,7 @@
 					<option value="out">Out</option>
 				</select>
 				<br>
+<<<<<<< HEAD
 				<input type="number" placeholder="Time that people are standing at same place" id="dwell" hidden>
 				<input type="number" placeholder="Number of people in the area" id="limit" hidden>
 				<input type="number" placeholder="Amount that should enter the area" id="in" hidden>
@@ -66,6 +64,36 @@
 				<br>
 				
 				<div class="button">Save changes</div>
+=======
+				<input type="number" placeholder="Minutes that people are standing in the zone" id="dwell" hidden>
+				<input type="number" placeholder="Amount that is in the zone at the same time" id="limit" hidden>
+				<label for="event-action">Event action:</label>
+				<select name="event-action" id="event-action">
+					<option value="sms">SMS</option>
+					<option value="twitter">Twitter</option>
+				</select>
+				<br>
+				<div id="sms" hidden>
+					<input type="number" placeholder="Enter a phonenumber">
+					<textarea name="" id="" placeholder="Enter the message that should be sent"></textarea>
+				</div>
+				<div id="twitter" hidden>
+					<input type="number" placeholder="Enter hashtag that you want to use">
+					<textarea name="" id="" placeholder="Enter the message that should be published"></textarea>
+				</div>
+				<label for="day">Day:</label>
+				<select name="day" id="">
+					<option value="mon">Monday</option>
+					<option value="tue">Tuesday</option>
+					<option value="wed">Wednesday</option>
+					<option value="thu">Thursday</option>
+					<option value="fri">Friday</option>
+					<option value="sat">Saturday</option>
+					<option value="sun">Sunday</option>
+				</select>
+				<br>
+				<div class="button">Publish event</div>
+>>>>>>> origin/master
 			</div>
 		</div>
 		<div class="row">
@@ -82,21 +110,22 @@
 
 					<input id="tab-4" type="radio" name="tab-group" />
 					<label for="tab-4">Out</label>
-					<!-- <div class="right"> -->
-						<input id="tab-5" type="radio" name="tab-group" />
-						<label for="tab-5">Log</label>
-					<!-- </div> -->
+
+					<input id="tab-5" type="radio" name="tab-group" />
+					<label for="tab-5">Log</label>
+			
 
 
 					<div id="content" class="clearfix">
 						<div id="content-1">
 							<table id="table-dwell" class="u-full-width table">
 								<thead>
-									<tr>
+									<tr class="table-header">
 										<th>Area</th>
 										<th>Day</th>
-										<th>Time</th>
+										<th>Minutes</th>
 										<th>Action</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -107,11 +136,12 @@
 						<div id="content-2">
 							<table id="table-limit" class="u-full-width table">
 								<thead>
-									<tr>
+									<tr class="table-header">
 										<th>Area</th>
 										<th>Day</th>
 										<th>People</th>
 										<th>Action</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -123,10 +153,11 @@
 						<div id="content-3">
 							<table id="table-in" class="u-full-width table">
 								<thead>
-									<tr>
+									<tr class="table-header">
 										<th>Area</th>
 										<th>Day</th>
 										<th>Action</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -137,10 +168,11 @@
 						<div id="content-4">
 							<table id="table-out" class="u-full-width table">
 								<thead>
-									<tr>
+									<tr class="table-header">
 										<th>Area</th>
 										<th>Day</th>
 										<th>Action</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -151,10 +183,12 @@
 						<div id="content-5">
 							<table id="table-log" class="u-full-width table">
 								<thead>
-									<tr>
+									<tr class="table-header">
 										<th>Area</th>
 										<th>Day</th>
 										<th>Action</th>
+										<th>Other</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>

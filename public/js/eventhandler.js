@@ -5,6 +5,7 @@ var hadConnection = false;
 
 $(document).ready(function(){
 	eventDropdown();
+	eventActionDropdown()
 	connectSocket();
 });
 function showAndHide(array, value){
@@ -19,6 +20,7 @@ function eventDropdown(){
 		showAndHide(options, this.value);
 	});
 }
+<<<<<<< HEAD
 
 //Populate event-action text field
 
@@ -27,6 +29,14 @@ $('#event-action').on('change', function() {
     $('#event-actionInput').attr('placeholder', placeholder);
 });
 
+=======
+function eventActionDropdown(){
+	$('#event-action').on('change', function() {
+		var options = ['sms', 'twitter'];
+		showAndHide(options, this.value);
+	});
+}
+>>>>>>> origin/master
 function socketOnOpen(){
 	console.log('Websocket open')
 	if (hadConnection) return;
@@ -41,23 +51,23 @@ function socketOnMessage(evt){
 	if (data.res == "get"){
 		console.log("get");
 		$.each(data.events.dwell, function(key, val){
-				$('#table-in tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.time +'</td><td>'+ val.action +'</td><td><span>X</span></td></tr>');
+				$('#table-in tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.time +'</td><td>'+ val.action +'</td><td><span class="close">x</span></td></tr>');
 		});
 		$.each(data.events.limit, function(key, val){
-				$('#table-limit tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.limit +'</td><td>'+ val.action +'</td><td><span>X</span></td></tr>');
+				$('#table-limit tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.limit +'</td><td>'+ val.action +'</td><td><span class="close">x</span></td></tr>');
 		});
 		$.each(data.events.in, function(key, val){
-				$('#table-in tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.action +'</td><td><span>X</span></td></tr>');
+				$('#table-in tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.action +'</td><td><span class="close">x</span></td></tr>');
 		});
 		$.each(data.events.out, function(key, val){
-				$('#table-in tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.action +'</td><td><span>X</span></td></tr>');
+				$('#table-in tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.action +'</td><td><span class="close">x</span></td></tr>');
 		});
 
 	}
 	else if (data.res == "live"){
 		console.log(data);
 		$.each(data.result, function(key, val){
-			$('#table-log tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.action +'</td><td><span>X</span></td></tr>');
+			$('#table-log tr:last').after('<tr><td>'+ val.area +'</td><td>'+ val.day +'</td><td>'+ val.action +'</td><td><span class="close">x</span></td></tr>');
 		});
 	}
 }
