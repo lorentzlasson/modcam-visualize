@@ -1,6 +1,6 @@
 Date.prototype.getWeek = function() {
-	var onejan = new Date(this.getFullYear(), 0, 1);
-  return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7) - 1;
+	var onejan = new Date(this.getFullYear(), 0, 1)
+	return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7) - 1
 }
 
 function set(direction, value){
@@ -19,34 +19,27 @@ function setByRow(raw){
 	}
 
 	if (rows.length > 1){
-		var row = rows[1]
+		row = rows[1]
 		set(row.key[row.key.length-1], row.value)
 	}
 }
 
 function getDayName(n){
 	switch(n){
-		case '0':
-				return 'sun'
-			break
-		case '1':
-				return 'mon'
-			break;
-		case '2':
-				return 'tue'
-			break;
-		case '3':
-				return 'wed'
-			break;
-		case '4':
-				return 'thu'
-			break;
-		case '5':
-				return 'fri'
-			break;
-		case '6':
-				return 'sat'
-			break;
+	case '0':
+		return 'sun'
+	case '1':
+		return 'mon'
+	case '2':
+		return 'tue'
+	case '3':
+		return 'wed'
+	case '4':
+		return 'thu'
+	case '5':
+		return 'fri'
+	case '6':
+		return 'sat'
 	}
 }
 
@@ -83,13 +76,13 @@ function setWeek(raw){
 		var date = new Date(rows[r].key[0],rows[r].key[1],rows[r].key[2])
 
 		date.setDate(date.getDate()-1)
-		var day = date.getDay()
+		day = date.getDay()
 
 		newRows[day]= newRows[day] + rows[r].value || rows[r].value
 
 	}
 
-	for (var r in newRows){
+	for (r in newRows){
 		console.log(getDayName(r), newRows[r])
 		setWeekColor(getDayName(r), newRows[r])
 	}
@@ -108,11 +101,11 @@ function render(){
 
 
 function getMonday(d) {
-  d = new Date(d);
-  var day = d.getDay(),
-      diff = d.getDate() - day + (day == 0 ? -6:1); 
+	d = new Date(d)
+	var day = d.getDay()
+	var diff = d.getDate() - day + (day == 0 ? -6:1)
 
-  d = new Date(d.setDate(diff));
+	d = new Date(d.setDate(diff))
 	d.setHours(1)
 	d.setMinutes(0)
 	d.setSeconds(0)
@@ -153,22 +146,22 @@ function updateSelectedDate(newDate){
 
 	currentDate = new Date(newDate)
 	currentDate.setHours(currentDate.getHours()+1)
-	toDate = new Date(currentDate)
+	var toDate = new Date(currentDate)
 	var json = JSON.stringify({startKey: currentDate.toISOString(), endKey: toDate.toISOString(), reqType: 'TotalByDate'})
 	socket.send(json)
 
 	if (currentMonday.getTime() != newMonday.getTime()){
-		var weekRequest = JSON.stringify({startKey: currentDate.toISOString(), reqType: "Week"})
+		var weekRequest = JSON.stringify({startKey: currentDate.toISOString(), reqType: 'Week'})
 		socket.send(weekRequest)
 	}
 
 	var lateCurrent = new Date(currentDate)
 	lateCurrent.setHours(23)
-	var hourRequest = JSON.stringify({startKey: currentDate.toISOString(), endKey: lateCurrent.toISOString(), reqType: "TotalByHour"})
+	var hourRequest = JSON.stringify({startKey: currentDate.toISOString(), endKey: lateCurrent.toISOString(), reqType: 'TotalByHour'})
 	socket.send(hourRequest)
 	$('#week').html(currentDate.getWeek())
 
-	var bleRequest = JSON.stringify({startKey: currentDate.toISOString(), endKey: currentDate.toISOString(), reqType: "TotalBleByDate"})
+	var bleRequest = JSON.stringify({startKey: currentDate.toISOString(), endKey: currentDate.toISOString(), reqType: 'TotalBleByDate'})
 	socket.send(bleRequest)
 }
 
@@ -189,20 +182,20 @@ function socketOnOpen(){
 	console.log('Websocket open')
 	connectFails = 0
 	if (today.getTime() == currentDate.getTime()){
-		var request = JSON.stringify({reqType: "Today"})
+		var request = JSON.stringify({reqType: 'Today'})
 		socket.send(request)
 	} else {
 		var json = JSON.stringify({startKey: currentDate.toISOString(), endKey: currentDate.toISOString(), reqType: 'TotalByDate'})
 		socket.send(json)
 	}
 
-	var weekRequest = JSON.stringify({startKey: currentDate.toISOString(), reqType: "Week"})
+	var weekRequest = JSON.stringify({startKey: currentDate.toISOString(), reqType: 'Week'})
 	socket.send(weekRequest)
 
 
 	var lateCurrent = new Date(currentDate)
 	lateCurrent.setHours(23)
-	var hourRequest = JSON.stringify({startKey: currentDate.toISOString(), endKey: lateCurrent.toISOString(), reqType: "TotalByHour"})
+	var hourRequest = JSON.stringify({startKey: currentDate.toISOString(), endKey: lateCurrent.toISOString(), reqType: 'TotalByHour'})
 	socket.send(hourRequest)
 
 	var mostFlowRequest = JSON.stringify({reqType: 'MostFlow'})
@@ -210,7 +203,7 @@ function socketOnOpen(){
 
 
 
-	var bleRequest = JSON.stringify({startKey: currentDate.toISOString(), endKey: currentDate.toISOString(), reqType: "TotalBleByDate"})
+	var bleRequest = JSON.stringify({startKey: currentDate.toISOString(), endKey: currentDate.toISOString(), reqType: 'TotalBleByDate'})
 	socket.send(bleRequest)
 }
 
@@ -218,11 +211,8 @@ function setMostOccupied(raw){
 	var rows = raw.rows
 	var maxHour = undefined
 	var numOfP = 0
-	var hourMap = {}
 	var movMap = { 0: 0, 1: 0}
 
-	var totalIn = 0
-	var totalOut = 0
 	
 
 	for (var r in rows){
@@ -246,7 +236,7 @@ function setMostOccupied(raw){
 }
 
 function paddWithZero(n){
-	return n < 10 ? "0" + n : "" + n
+	return n < 10 ? '0' + n : '' + n
 }
 
 function setMostFlow(raw){
@@ -272,13 +262,13 @@ function setMostFlow(raw){
 function socketOnMessage(evt){
 	var data = JSON.parse(evt.data)
 
-	if (data.reqType == "Today"){
-		console.log("Today data")
+	if (data.reqType == 'Today'){
+		console.log('Today data')
 		console.log(data.rows)
 		setByRow(data)
 		$('#comp-modcam').html(countMap[0]+countMap[1])
-	} else if (data.reqType == "Live" && today.getTime() == currentDate.getTime()) {
-		console.log("Live data")
+	} else if (data.reqType == 'Live' && today.getTime() == currentDate.getTime()) {
+		console.log('Live data')
 		console.log(data)
 		update(data.direction, data.count)
 		var v = $('#comp-modcam').html()
@@ -311,7 +301,7 @@ function socketOnMessage(evt){
 	} else if (data.reqType == 'bleLive' && today.getTime() == currentDate.getTime()){
 		console.log('Live BLE data')
 		console.log(data)
-		var v = $('#comp-ble').html()
+		v = $('#comp-ble').html()
 		$('#comp-ble').html(parseInt(v)+1)
 	}
 }
@@ -321,37 +311,29 @@ function socketOnClose(){
 	if (3 > connectFails++){
 		connectSocket()
 	} else {
-		console.log("Tried connecting to socket to many times")
+		console.log('Tried connecting to socket to many times')
 	}
 
 }
 
-function socketOnError(){
-	console.log('Websocket error')
-	if (3 > connectFails++){
-		connectSocket()
-	} else {
-		console.log("tried connecting to socket to many times")
-	}
-}
 function activateSelectionBar(){
-	$('#all').addClass('active-tab');
+	$('#all').addClass('active-tab')
 
-     $('#women').click(function () { 
-		 $('#all').removeClass('active-tab');
-		 $('#men').removeClass('active-tab');
-		 $('#women').addClass('active-tab');
-    });
-    $('#men').click(function () { 
-		 $('#all').removeClass('active-tab');
-		 $('#women').removeClass('active-tab');
-		 $('#men').addClass('active-tab');
-    });
-    $('#all').click(function () { 
-		 $('#men').removeClass('active-tab');
-		 $('#women').removeClass('active-tab');
-		 $('#all').addClass('active-tab');
-    });
+	$('#women').click(function () {
+		$('#all').removeClass('active-tab')
+		$('#men').removeClass('active-tab')
+		$('#women').addClass('active-tab')
+	})
+	$('#men').click(function () {
+		$('#all').removeClass('active-tab')
+		$('#women').removeClass('active-tab')
+		$('#men').addClass('active-tab')
+	})
+	$('#all').click(function () {
+		$('#men').removeClass('active-tab')
+		$('#women').removeClass('active-tab')
+		$('#all').addClass('active-tab')
+	})
 }
 
 
@@ -361,12 +343,11 @@ var socket = undefined
 var socketAdr = 'ws://node-red-counter.mybluemix.net/ws/counter'
 var today = getToday()
 var currentDate = new Date(today)
-var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-var colors = ['none']
+var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
 
 $(document).ready(function(){
-	activateSelectionBar(); 
+	activateSelectionBar()
 	createDatepicker()
 	connectSocket()
 	$('#week').html(currentDate.getWeek())
