@@ -2,7 +2,7 @@
 	"name": "modcam-visualize",
 	"version": "0.0.1",
 	"scripts": {
-		"start": "node index"
+		"start": "node app"
 	},
 	"dependencies": {
 		"express": "4.12.x",
