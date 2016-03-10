@@ -371,10 +371,3 @@ $(document).ready(function(){
 	connectSocket()
 	$('#week').html(currentDate.getWeek())
 })
-
-
-
-
-
-
-
