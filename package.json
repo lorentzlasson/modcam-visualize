@@ -1,15 +1,15 @@
 {
-	"name": "modcam-visualize",
-	"version": "0.0.1",
-	"scripts": {
-		"start": "node app"
-	},
-	"dependencies": {
-		"express": "4.12.x",
-		"cfenv": "1.0.x"
-	},
-	"repository": {},
-	"engines": {
-		"node": "0.12.x"
-	} 
+  "name": "modcam-visualize",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "cfenv": "1.0.x",
+    "express": "4.12.x"
+  ,
+  "repository": {},
+  "engines": {
+    "node": "0.12.x"
+  }
 }
