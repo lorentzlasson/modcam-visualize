@@ -4,6 +4,6 @@ var server = require('./server')
 var websocket = require('./websocket')
 
 server.listen(appEnv.port)
-websocket.run()
+websocket.start()
 
 console.log('server starting on ' + appEnv.url)
