@@ -1,6 +1,0 @@
-TotalByYear : https://2ed64fa0-abba-4d60-8437-62d7bcad30af-bluemix.cloudant.com/counterdb/_design/data/_view/total_by_year?reduce=true&group_level=2
-TotalByMonth : https://2ed64fa0-abba-4d60-8437-62d7bcad30af-bluemix.cloudant.com/counterdb/_design/data/_view/total_by_month?reduce=true&group_level=3
-TotalByDate : https://2ed64fa0-abba-4d60-8437-62d7bcad30af-bluemix.cloudant.com/counterdb/_design/data/_view/total_by_date?reduce=true&inclusive_end=true&group_level=4
-TotalByHour : https://2ed64fa0-abba-4d60-8437-62d7bcad30af-bluemix.cloudant.com/counterdb/_design/data/_view/total_by_hour?reduce=true&inclusive_end=true&group_level=5
-Today
-MostPerTime
