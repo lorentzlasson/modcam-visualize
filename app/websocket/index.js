@@ -9,7 +9,9 @@ var run = () => {
 		}, 1000)
 		console.log('started client interval')
 		ws.on('message', function(data) {
-			console.log('message received: %s', data)
+			var msg = 'message received: ' + data
+			console.log(msg)
+			ws.send(msg)
 		})
 		ws.on('close', function() {
 			console.log('stopping client interval')
