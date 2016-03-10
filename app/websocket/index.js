@@ -1,6 +1,6 @@
 var wss
 
-var run = () => {
+var start = () => {
 	var WebSocketServer = require('ws').Server
 	var server = require('../server')
 	wss = new WebSocketServer({server, path: '/ws/counter'})
@@ -29,6 +29,6 @@ var broadcast = (message) => {
 }
 
 module.exports = {
-	run,
+	start,
 	broadcast
 }
