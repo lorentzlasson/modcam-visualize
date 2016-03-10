@@ -6,8 +6,9 @@
   },
   "dependencies": {
     "cfenv": "1.0.x",
-    "express": "4.12.x"
-  ,
+    "express": "4.12.x",
+    "ws": "^1.0.1"
+  },
   "repository": {},
   "engines": {
     "node": "0.12.x"
