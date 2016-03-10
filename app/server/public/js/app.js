@@ -340,7 +340,8 @@ function activateSelectionBar(){
 var countMap = {}
 var connectFails = 0
 var socket = undefined
-var socketAdr = 'ws://node-red-counter.mybluemix.net/ws/counter'
+var host = window.document.location.host
+var socketAdr = 'ws://' + host + '/ws/counter'
 var today = getToday()
 var currentDate = new Date(today)
 var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
