@@ -1,8 +1,10 @@
-var WebSocketServer = require('ws').Server
-var server = require('../server')
-var wss = new WebSocketServer({server, path: '/ws/counter'})
+var wss
 
 var run = () => {
+	var WebSocketServer = require('ws').Server
+	var server = require('../server')
+	wss = new WebSocketServer({server, path: '/ws/counter'})
+
 	wss.on('connection', function(ws) {
 		var id = setInterval(function() {
 			ws.send(JSON.stringify(process.memoryUsage()), function() { /* ignore errors */ })
@@ -20,6 +22,13 @@ var run = () => {
 	})
 }
 
+var broadcast = (message) => {
+	wss.clients.forEach((client) => {
+		client.send(message)
+	})
+}
+
 module.exports = {
-	run
+	run,
+	broadcast
 }
