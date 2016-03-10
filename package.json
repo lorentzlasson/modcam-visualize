@@ -1,7 +1,6 @@
 {
-	"name": "NodejsStarterApp",
+	"name": "modcam-visualize",
 	"version": "0.0.1",
-	"description": "A sample nodejs app for Bluemix",
 	"scripts": {
 		"start": "node index"
 	},
