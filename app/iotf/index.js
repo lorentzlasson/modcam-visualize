@@ -11,7 +11,7 @@ if(!creds)
 var start = () => {
 	var config = {
 		'org': creds.org,
-		'id': appEnv.name,
+		'id': appEnv.name || 'modcam-visualize',
 		'auth-key': creds.apiKey,
 		'auth-token': creds.apiToken
 	}
