@@ -1,12 +1,17 @@
 var express = require('express')
 var router = express.Router()
+var db = require('../../database/peoplecount')
 
 router.get('/day/:date', (req, res) => {
-	var date = req.params.date
-
-	res.json({
-		date,
-		count: 0
+	db.getByDay(req.params.date)
+	.then((data) => {
+		res.json({
+			data
+		})
+	}, (err) => {
+		res.status(400).json({
+			error: err
+		})
 	})
 })
 
