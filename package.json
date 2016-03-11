@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "cfenv": "1.0.x",
+    "debug": "^2.2.0",
     "express": "4.12.x",
     "ibmiotf": "^0.2.11",
     "ws": "^1.0.1"

@@ -1,3 +1,4 @@
+var debug = require('debug')('modcam:index')
 var cfenv = require('cfenv')
 var appEnv = cfenv.getAppEnv()
 var server = require('./server')
@@ -8,4 +9,4 @@ server.listen(appEnv.port)
 websocket.start()
 iotf.start()
 
-console.log('server starting on ' + appEnv.url)
+debug('server starting on ' + appEnv.url)

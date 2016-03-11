@@ -1,3 +1,4 @@
+var debug = require('debug')('modcam:iotf')
 var cfenv = require('cfenv')
 var appEnv = cfenv.getAppEnv()
 var creds = appEnv.getServiceCreds('my-iotf')
@@ -14,18 +15,17 @@ var start = () => {
 		'auth-key': creds.apiKey,
 		'auth-token': creds.apiToken
 	}
-	console.log('config: %j', config)
 	var client = new iotf.IotfApplication(config)
 	client.connect()
 	client.on('connect', () => {
-		console.log('connected')
+		debug('connected')
 		client.subscribeToDeviceEvents('+', '+', 'count')
 	})
 	client.on('count', receiveCount)
 }
 
 var receiveCount = (deviceType, deviceId, eventType, format, payload) => {
-	console.log('received: %s', payload)
+	debug('%s received', eventType)
 	websocket.broadcast(payload)
 }
 

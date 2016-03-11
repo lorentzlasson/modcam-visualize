@@ -1,3 +1,5 @@
+var debug = require('debug')('modcam:websocket')
+
 var wss
 
 var start = () => {
@@ -9,14 +11,14 @@ var start = () => {
 		var id = setInterval(function() {
 			ws.send(JSON.stringify(process.memoryUsage()), function() { /* ignore errors */ })
 		}, 1000)
-		console.log('started client interval')
+		debug('started client interval')
 		ws.on('message', function(data) {
 			var msg = 'message received: ' + data
-			console.log(msg)
+			debug(msg)
 			ws.send(msg)
 		})
 		ws.on('close', function() {
-			console.log('stopping client interval')
+			debug('stopping client interval')
 			clearInterval(id)
 		})
 	})
