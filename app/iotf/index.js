@@ -26,7 +26,8 @@ var start = () => {
 
 var receiveCount = (deviceType, deviceId, eventType, format, payload) => {
 	debug('%s received', eventType)
-	websocket.broadcast(payload)
+	var message = payload.toString()
+	websocket.broadcast(message)
 }
 
 module.exports = {
