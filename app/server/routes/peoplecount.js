@@ -4,9 +4,9 @@ var db = require('../../database/peoplecount')
 
 router.get('/day/:date', (req, res) => {
 	db.getByDay(req.params.date)
-	.then((data) => {
+	.then((counts) => {
 		res.json({
-			data
+			counts
 		})
 	}, (err) => {
 		res.status(400).json({
