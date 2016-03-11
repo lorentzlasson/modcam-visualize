@@ -29,7 +29,8 @@ var getByDay = (date) => {
 				debug('data retreived: %j', body)
 				var values = body.rows.map((item) => {
 					return {
-						[item.key[3]]: item.value // 3rd element in array is direction
+						direction: item.key[3],
+						value: item.value // 3rd element in array is direction
 					}
 				})
 				return resolve(values)
