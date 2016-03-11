@@ -21,7 +21,7 @@ var start = () => {
 		debug('connected')
 		client.subscribeToDeviceEvents('+', '+', 'count')
 	})
-	client.on('count', receiveCount)
+	client.on('deviceEvent', receiveCount)
 }
 
 var receiveCount = (deviceType, deviceId, eventType, format, payload) => {
