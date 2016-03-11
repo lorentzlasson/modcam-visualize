@@ -1,3 +1,4 @@
 module.exports = {
-	peoplecount: require('./peoplecount')
+	peoplecount: require('./peoplecount'),
+	broadcast: require('./broadcast')
 }
