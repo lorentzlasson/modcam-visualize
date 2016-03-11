@@ -8,18 +8,16 @@ var start = () => {
 	wss = new WebSocketServer({server, path: '/ws/counter'})
 
 	wss.on('connection', function(ws) {
-		var id = setInterval(function() {
-			ws.send(JSON.stringify(process.memoryUsage()), function() { /* ignore errors */ })
-		}, 1000)
-		debug('started client interval')
+		debug('client connected')
+
 		ws.on('message', function(data) {
 			var msg = 'message received: ' + data
 			debug(msg)
 			ws.send(msg)
 		})
+
 		ws.on('close', function() {
-			debug('stopping client interval')
-			clearInterval(id)
+			debug('client disconnected')
 		})
 	})
 }
