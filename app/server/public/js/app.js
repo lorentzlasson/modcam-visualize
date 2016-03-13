@@ -52,9 +52,9 @@ function loadCountByDay(date){
 	$.get('/peoplecount/day?date=' + date, function(data) {
 		var counts = data.counts
 		if(counts.length > 0) {
-			counts.forEach(function(count) {
-				set(count.direction, count.value)
-			})
+			for(var i = 0; i < counts.length; i++){
+				set(i, counts[i])
+			}
 		}
 		else {
 			// set counts to 0 if no data is found
