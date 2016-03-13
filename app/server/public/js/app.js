@@ -49,7 +49,7 @@ function updateSelectedDate(newDate){
 }
 
 function loadCountByDay(date){
-	$.get('/peoplecount/day/' + date, function(data) {
+	$.get('/peoplecount/day?date=' + date, function(data) {
 		var counts = data.counts
 		if(counts.length > 0) {
 			counts.forEach(function(count) {
