@@ -10,10 +10,15 @@ var getByDay = (date) => {
 	var endkey = dateSplit.slice(0)
 	endkey.push(1)
 
-	return getByDate(startkey, endkey)
+	return getByDate(startkey, endkey, (rows) => {
+		return rows.map((item) => {
+			return item.value
+		})
+	})
+}
 }
 
-var getByDate = (startkey, endkey) => {
+var getByDate = (startkey, endkey, massage) => {
 	return new Promise((resolve, reject) => {
 		var params = {
 			reduce: true,
@@ -26,12 +31,7 @@ var getByDate = (startkey, endkey) => {
 		db.view('data', 'total_by_date', params, (err, body) => {
 			if (!err) {
 				debug('data retreived: %j', body)
-				var values = body.rows.map((item) => {
-					return {
-						direction: item.key[3], // 4th element in array is direction
-						value: item.value
-					}
-				})
+				var values = massage(body.rows)
 				return resolve(values)
 			}
 			reject(err.message)
