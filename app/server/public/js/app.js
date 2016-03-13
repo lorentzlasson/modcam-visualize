@@ -8,6 +8,56 @@ function set(direction, value){
 	render()
 }
 
+function setWeek(counts){
+	$('.days-data li').removeClass('none green yellow red').addClass('none')
+
+	for (var i = 0; i < 7; i++){
+		var day = getDayName(''+i)
+		$('#' + day).attr('data-tooltip', 0)
+	}
+
+	counts.forEach(function(item){
+		setWeekColor(getDayName(item.day), item.value)
+	})
+}
+
+function setWeekColor(name, value){
+	var cname = ''
+	if (value < 1){
+		cname = 'none'
+	}
+	else if (value < 160){
+		cname = 'green'
+	} else if (value < 200){
+		cname = 'yellow'
+	} else {
+		cname = 'red'
+	}
+
+
+	$('#'+name).removeClass('none green yellow red').addClass(cname)
+	$('#'+name).attr('data-tooltip', value)
+}
+
+function getDayName(n){
+	switch(n){
+	case 0:
+		return 'sun'
+	case 1:
+		return 'mon'
+	case 2:
+		return 'tue'
+	case 3:
+		return 'wed'
+	case 4:
+		return 'thu'
+	case 5:
+		return 'fri'
+	case 6:
+		return 'sat'
+	}
+}
+
 function update(direction, value){
 	countMap[direction] = (countMap[direction] || 0)
 	countMap[direction] += value
@@ -45,8 +95,23 @@ function updateSelectedDate(newDate){
 	}
 	currentDate = new Date(newDate)
 	currentDate.setHours(currentDate.getHours()+1)
-	loadCountByDay(currentDate)
+	loadCounts()
 }
+
+function loadCounts(){
+	loadCountByDay(currentDate)
+	loadCountByWeek(currentDate)
+}
+
+function loadCountByWeek(date){
+	$.get('/peoplecount/week?date=' + date, function(data) {
+		var counts = data.counts
+		if(counts.length > 0) {
+			setWeek(counts)
+		}
+	})
+}
+
 
 function loadCountByDay(date){
 	$.get('/peoplecount/day?date=' + date, function(data) {
@@ -101,7 +166,7 @@ var currentDate = new Date(today)
 
 $(document).ready(function(){
 	createDatepicker()
-	loadCountByDay(currentDate)
+	loadCounts()
 	connectSocket()
 	$('#week').html(currentDate.getWeek())
 })
