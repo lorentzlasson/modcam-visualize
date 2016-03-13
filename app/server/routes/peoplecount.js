@@ -27,6 +27,11 @@ router.get('/day/', (req, res) => {
 		})
 	})
 })
+
+router.get('/week/', (req, res) => {
+	db.getByWeek(req.date)
+	.then((counts) => {
+		return res.json({
 			counts
 		})
 	}, (err) => {
