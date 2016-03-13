@@ -21,7 +21,8 @@ router.get('/day/', (req, res) => {
 			date: req.date,
 			counts
 		})
-	}, (err) => {
+	})
+	.catch((err) => {
 		res.status(400).json({
 			error: err
 		})
@@ -34,7 +35,8 @@ router.get('/week/', (req, res) => {
 		return res.json({
 			counts
 		})
-	}, (err) => {
+	})
+	.catch((err) => {
 		res.status(400).json({
 			error: err
 		})
