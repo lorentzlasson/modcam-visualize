@@ -16,6 +16,27 @@ var getByDay = (date) => {
 		})
 	})
 }
+
+var getByWeek = (date) => {
+	var week = util.getWeek(date)
+	var startkey = util.splitDate(week.start)
+	startkey.push(0)
+	var endkey = util.splitDate(week.end)
+	endkey.push(1)
+
+	return getByDate(startkey, endkey, (rows) => {
+		return rows.filter((item) => {
+			return !item.key[3]
+		})
+		.map((item) => {
+			var date = item.key.slice(0,3).join()
+			var day = new Date(date).getDay()
+			return {
+				value: item.value,
+				day
+			}
+		})
+	})
 }
 
 var getByDate = (startkey, endkey, massage) => {
@@ -40,5 +61,6 @@ var getByDate = (startkey, endkey, massage) => {
 }
 
 module.exports = {
-	getByDay
+	getByDay,
+	getByWeek
 }
