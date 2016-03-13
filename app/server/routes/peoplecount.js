@@ -3,8 +3,6 @@ var router = express.Router()
 var util = require('../../util')
 var db = require('../../database/peoplecount')
 
-router.get('/day/:date', (req, res) => {
-	var date = new Date(req.params.date)
 router.get('*', (req, res, next) => {
 	var date = new Date(req.query.date)
 	if(!util.isValidDate(date)){
@@ -16,9 +14,19 @@ router.get('*', (req, res, next) => {
 	return next()
 })
 
-	db.getByDay(date)
+router.get('/day/', (req, res) => {
+	db.getByDay(req.date)
 	.then((counts) => {
 		res.json({
+			date: req.date,
+			counts
+		})
+	}, (err) => {
+		res.status(400).json({
+			error: err
+		})
+	})
+})
 			counts
 		})
 	}, (err) => {
