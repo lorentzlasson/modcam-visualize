@@ -28,8 +28,8 @@ var getByDate = (startkey, endkey) => {
 				debug('data retreived: %j', body)
 				var values = body.rows.map((item) => {
 					return {
-						direction: item.key[3],
-						value: item.value // 3rd element in array is direction
+						direction: item.key[3], // 4th element in array is direction
+						value: item.value
 					}
 				})
 				return resolve(values)
