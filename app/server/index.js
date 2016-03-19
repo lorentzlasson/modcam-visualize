@@ -8,5 +8,5 @@ app.use('/broadcast', routes.broadcast)
 
 app.use(express.static(__dirname + '/public'))
 
-var server = http.createServer(app)
+let server = http.createServer(app)
 module.exports = server

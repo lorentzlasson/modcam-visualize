@@ -1,5 +1,5 @@
 Date.prototype.getWeek = function() {
-	var onejan = new Date(this.getFullYear(), 0, 1)
+	let onejan = new Date(this.getFullYear(), 0, 1)
 	return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7) - 1
 }
 
@@ -11,8 +11,8 @@ function set(direction, value){
 function setWeek(counts){
 	$('.days-data li').removeClass('none green yellow red').addClass('none')
 
-	for (var i = 0; i < 7; i++){
-		var day = getDayName(''+i)
+	for (let i = 0; i < 7; i++){
+		let day = getDayName(''+i)
 		$('#' + day).attr('data-tooltip', 0)
 	}
 
@@ -22,7 +22,7 @@ function setWeek(counts){
 }
 
 function setWeekColor(name, value){
-	var cname = ''
+	let cname = ''
 	if (value < 1){
 		cname = 'none'
 	}
@@ -70,7 +70,7 @@ function render(){
 }
 
 function getToday(){
-	var d = new Date()
+	let d = new Date()
 	d.setHours(1)
 	d.setMinutes(0)
 	d.setSeconds(0)
@@ -82,7 +82,7 @@ function createDatepicker(){
 	$('#datepicker').datepicker({
 		dateFormat:	'dd/mm/y',
 		onClose: function(){
-			var selectedDate = $('#datepicker').datepicker('getDate')
+			let selectedDate = $('#datepicker').datepicker('getDate')
 			updateSelectedDate(selectedDate)
 		}
 	})
@@ -105,7 +105,7 @@ function loadCounts(){
 
 function loadCountByWeek(date){
 	$.get('/peoplecount/week?date=' + date, function(data) {
-		var counts = data.counts
+		let counts = data.counts
 		if(counts.length > 0) {
 			setWeek(counts)
 		}
@@ -115,9 +115,9 @@ function loadCountByWeek(date){
 
 function loadCountByDay(date){
 	$.get('/peoplecount/day?date=' + date, function(data) {
-		var counts = data.counts
+		let counts = data.counts
 		if(counts.length > 0) {
-			for(var i = 0; i < counts.length; i++){
+			for(let i = 0; i < counts.length; i++){
 				set(i, counts[i])
 			}
 		}
@@ -130,10 +130,10 @@ function loadCountByDay(date){
 }
 
 function socketOnMessage(evt){
-	var data = JSON.parse(evt.data)
+	let data = JSON.parse(evt.data)
 	console.log('data: %s', data)
 	update(data.direction, data.value)
-	var v = $('#comp-modcam').html()
+	let v = $('#comp-modcam').html()
 	$('#comp-modcam').html(parseInt(v)+data.count)
 }
 
@@ -156,13 +156,13 @@ function connectSocket(){
 	}
 }
 
-var countMap = {}
-var connectFails = 0
-var socket = undefined
-var host = window.document.location.host
-var socketAdr = 'ws://' + host + '/ws/counter'
-var today = getToday()
-var currentDate = new Date(today)
+let countMap = {}
+let connectFails = 0
+let socket = undefined
+let host = window.document.location.host
+let socketAdr = 'ws://' + host + '/ws/counter'
+let today = getToday()
+let currentDate = new Date(today)
 
 $(document).ready(function(){
 	createDatepicker()

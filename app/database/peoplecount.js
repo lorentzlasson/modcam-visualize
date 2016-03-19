@@ -3,11 +3,11 @@ const cloudant = require('./')
 const db = cloudant.use('counterdb')
 const util = require('../util')
 
-var getByDay = (date) => {
-	var dateSplit = util.splitDate(date)
-	var startkey = dateSplit.slice(0)
+let getByDay = (date) => {
+	let dateSplit = util.splitDate(date)
+	let startkey = dateSplit.slice(0)
 	startkey.push(0)
-	var endkey = dateSplit.slice(0)
+	let endkey = dateSplit.slice(0)
 	endkey.push(1)
 
 	return getByDate(startkey, endkey, (rows) => {
@@ -17,11 +17,11 @@ var getByDay = (date) => {
 	})
 }
 
-var getByWeek = (date) => {
-	var week = util.getWeek(date)
-	var startkey = util.splitDate(week.start)
+let getByWeek = (date) => {
+	let week = util.getWeek(date)
+	let startkey = util.splitDate(week.start)
 	startkey.push(0)
-	var endkey = util.splitDate(week.end)
+	let endkey = util.splitDate(week.end)
 	endkey.push(1)
 
 	return getByDate(startkey, endkey, (rows) => {
@@ -29,8 +29,8 @@ var getByWeek = (date) => {
 			return !item.key[3]
 		})
 		.map((item) => {
-			var date = item.key.slice(0,3).join()
-			var day = new Date(date).getDay()
+			let date = item.key.slice(0,3).join()
+			let day = new Date(date).getDay()
 			return {
 				value: item.value,
 				day
@@ -39,9 +39,9 @@ var getByWeek = (date) => {
 	})
 }
 
-var getByDate = (startkey, endkey, massage) => {
+let getByDate = (startkey, endkey, massage) => {
 	return new Promise((resolve, reject) => {
-		var params = {
+		let params = {
 			reduce: true,
 			group_level: 4,
 			startkey,
@@ -52,7 +52,7 @@ var getByDate = (startkey, endkey, massage) => {
 		db.view('data', 'total_by_date', params, (err, body) => {
 			if (!err) {
 				debug('data retreived: %j', body)
-				var values = massage(body.rows)
+				let values = massage(body.rows)
 				return resolve(values)
 			}
 			reject(err.message)

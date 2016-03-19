@@ -8,14 +8,14 @@ const websocket = require('../websocket')
 if(!creds)
 	throw new Error('credentials not found')
 
-var start = () => {
-	var config = {
+let start = () => {
+	let config = {
 		'org': creds.org,
 		'id': appEnv.name || 'modcam-visualize',
 		'auth-key': creds.apiKey,
 		'auth-token': creds.apiToken
 	}
-	var client = new iotf.IotfApplication(config)
+	let client = new iotf.IotfApplication(config)
 	client.connect()
 	client.on('connect', () => {
 		debug('connected')
@@ -24,9 +24,9 @@ var start = () => {
 	client.on('deviceEvent', receiveCount)
 }
 
-var receiveCount = (deviceType, deviceId, eventType, format, payload) => {
+let receiveCount = (deviceType, deviceId, eventType, format, payload) => {
 	debug('%s received', eventType)
-	var message = payload.toString()
+	let message = payload.toString()
 	websocket.broadcast(message)
 }
 

@@ -4,7 +4,7 @@ const util = require('../../util')
 const db = require('../../database/peoplecount')
 
 router.get('*', (req, res, next) => {
-	var date = new Date(req.query.date)
+	let date = new Date(req.query.date)
 	if(!util.isValidDate(date)){
 		return res.status(400).json({
 			error: 'invalid date'

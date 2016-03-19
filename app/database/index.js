@@ -6,6 +6,6 @@ const nano = require('nano')
 if(!creds)
 	throw new Error('credentials not found')
 
-var cloudant = nano(creds.url)
+let cloudant = nano(creds.url)
 
 module.exports = cloudant
