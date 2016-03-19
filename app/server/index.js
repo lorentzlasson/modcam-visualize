@@ -6,7 +6,7 @@ const routes = require('./routes')
 app.use('/peoplecount', routes.peoplecount)
 app.use('/broadcast', routes.broadcast)
 
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + '/../public'))
 
 let server = http.createServer(app)
 module.exports = server
