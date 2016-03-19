@@ -1,7 +1,7 @@
-var express = require('express')
-var router = express.Router()
-var util = require('../../util')
-var db = require('../../database/peoplecount')
+const express = require('express')
+const router = express.Router()
+const util = require('../../util')
+const db = require('../../database/peoplecount')
 
 router.get('*', (req, res, next) => {
 	var date = new Date(req.query.date)

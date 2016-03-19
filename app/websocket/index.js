@@ -1,4 +1,4 @@
-var debug = require('debug')('modcam:websocket')
+const debug = require('debug')('modcam:websocket')
 
 var wss
 

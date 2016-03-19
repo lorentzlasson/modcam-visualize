@@ -1,7 +1,7 @@
-var debug = require('debug')('modcam:database')
-var cloudant = require('./')
-var db = cloudant.use('counterdb')
-var util = require('../util')
+const debug = require('debug')('modcam:database')
+const cloudant = require('./')
+const db = cloudant.use('counterdb')
+const util = require('../util')
 
 var getByDay = (date) => {
 	var dateSplit = util.splitDate(date)
