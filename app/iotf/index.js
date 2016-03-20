@@ -4,6 +4,7 @@ const appEnv = cfenv.getAppEnv()
 const creds = appEnv.getServiceCreds('my-iotf')
 const iotf = require('ibmiotf')
 const websocket = require('../websocket')
+const db = require('../database/peoplecount')
 
 if(!creds)
 	throw new Error('credentials not found')
@@ -28,6 +29,10 @@ let receiveCount = (deviceType, deviceId, eventType, format, payload) => {
 	debug('%s received', eventType)
 	let message = payload.toString()
 	websocket.broadcast(message)
+	db.storeCount(JSON.parse(message))
+	.then((response) => {
+		debug('response: %j', response)
+	})
 }
 
 module.exports = {

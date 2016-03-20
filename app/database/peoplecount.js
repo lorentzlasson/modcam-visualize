@@ -60,7 +60,19 @@ let getByDate = (startkey, endkey, massage) => {
 	})
 }
 
+let storeCount = (count) => {
+	return new Promise((resolve, reject) => {
+		count.timestamp = new Date().toISOString()
+		debug('count event: %j', count)
+		db.insert(count, (err, body) => {
+			if(err) return reject(err)
+			resolve(body)
+		})
+	})
+}
+
 module.exports = {
 	getByDay,
-	getByWeek
+	getByWeek,
+	storeCount
 }
