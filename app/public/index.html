@@ -1,142 +1,142 @@
 <!DOCTYPE html>
 <html><head>
-<title>People Counter</title>
-<meta charset="UTF-8"/>
-<link rel="stylesheet" href="css/peoplecounter.css"/>
-<link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600,700' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
-</head>
-<body>
-  <header>
-      <div class="container">
-      <div class="row">
-        <div class="six columns">
-           People Counter
-        </div>
-        <div class="six columns">
-          <label class="label-select-date" for="">Select a date to analyze:</label>
-          <div class="date-time">
-             <img src="images/cal.png" class="calendar-icon" alt="" width="20" height="20">
-             <input type="text" id="datepicker" placeholder="Select a date to analyze">
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-   
-  <div class="container">
-    <div class="row">
-      <div class="seven columns">
-        <section id="in-out">
-          <h3>People going in and out</h3>
-          <div class="wrapper">
-            <div class="box">
-              <div class="image-circle">
-               <img src="images/in.png" width="40" height="40">
-             </div>
-             <div class="counter" id="in">-</div>
-             <div class="countertype">In</div>
-           </div>
+		<title>People Counter</title>
+		<meta charset="UTF-8"/>
+		<link rel="stylesheet" href="css/peoplecounter.css"/>
+		<link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+	</head>
+	<body>
+		<header>
+		<div class="container">
+			<div class="row">
+				<div class="six columns">
+					People Counter
+				</div>
+				<div class="six columns">
+					<label class="label-select-date" for="">Select a date to analyze:</label>
+					<div class="date-time">
+						<img src="images/cal.png" class="calendar-icon" alt="" width="20" height="20">
+						<input type="text" id="datepicker" placeholder="Select a date to analyze">
+					</div>
+				</div>
+			</div>
+		</div>
+		</header>
 
-           <div class="box right">
-             <div class="image-circle">
-               <img src="images/out.png" width="40" height="40">
-             </div>
-             <div class="counter" id="out">-</div>
-             <div class="countertype">Out</div>
-           </div>
-         </div>
-       </section>
-     </div>
-     <div class="five columns">
-       <section id="ble">
-         <h3>Bluetooth vs Modcam</h3>
-          <div class="wrapper">
-            <div class="box">
-              <div class="image-circle">
-              <span class="ble-count" id="comp-ble">-</span>
-             </div>
-             <div class="ble-countertype">Bluetooth LE</div>
-           </div>
+		<div class="container">
+			<div class="row">
+				<div class="seven columns">
+					<section id="in-out">
+					<h3>People going in and out</h3>
+					<div class="wrapper">
+						<div class="box">
+							<div class="image-circle">
+								<img src="images/in.png" width="40" height="40">
+							</div>
+							<div class="counter" id="in">-</div>
+							<div class="countertype">In</div>
+						</div>
 
-           <div class="box right">
-             <div class="image-circle">
-              <span class="ble-count" id="comp-modcam">-</span>
-             </div>
-             <div class="ble-countertype">Modcam</div>
-           </div>
-         </div>
-       </section>
-     </div>
-     <div class="row">
-       <div class="four columns">
-         <div class="widget day">
-           <div class="sec-title">The most occupied time of the day</div>
-           <div class="sec-number" id="most"> - | - </div>
-         </div>
-       </div>
-       <div class="four columns">
-         <div class="widget day">
-           <div class="sec-title">Most occupied date in the office</div>
-              <div class="sec-date" id="mostOccupied"> - | - </div>
-         </div>
-       </div>
-       <div class="four columns">
-         <div class="widget day">
-           <div class="sec-title">Least occupied date in the office</div>
-              <div class="sec-date" id="leastOccupied"> - | - </div>
-         </div>
-       </div>
-     </div>
-    <!-- <div class="five columns">
-       <section id="widgets">
-         <div class="widget day">
-           <div class="title" >The most occupied time of the day</div>
-           <div class="number" id="most"> - | - </div>
-         </div>
-         <br>
-         <div class="widget">
-           <div class="title">Most occupied date in the office</div>
-              <div class="date" id="mostOccupied"> - | - </div>
-         </div>
-         <div class="widget">
-           <div class="title">Least occupied date in the office</div>
-              <div class="date" id="leastOccupied"> - | - </div>
-         </div>
-       </section>
-     </div>-->
-   </div>
-  <div class="row">
-     <div class="twelve columns weekly-indicator">
-      <div class="week-wrapper">
-							<div class="week-title">Week <span id="week">-</span></div>
-       <ul class="days-text">
-         <li>Mo</li>
-         <li>Tu</li>
-         <li>We</li>
-         <li>Th</li>
-         <li>Fr</li>
-         <li>Sa</li>
-         <li>Su</li>
-       </ul>
-       <ul class="days-data">
-         <li id="mon" class="none" data-tooltip="0"></li>
-         <li id="tue" class="none" data-tooltip="0"></li>
-         <li id="wed" class="none" data-tooltip="0"></li>
-         <li id="thu" class="none" data-tooltip="0"></li>
-         <li id="fri" class="none" data-tooltip="0"></li>
-         <li id="sat" class="none" data-tooltip="0"></li>
-         <li id="sun" class="none" data-tooltip="0"></li>
-       </ul>
-     </div>
-   </div>
- </div>
+						<div class="box right">
+							<div class="image-circle">
+								<img src="images/out.png" width="40" height="40">
+							</div>
+							<div class="counter" id="out">-</div>
+							<div class="countertype">Out</div>
+						</div>
+					</div>
+					</section>
+				</div>
+				<div class="five columns">
+					<section id="ble">
+					<h3>Bluetooth vs Modcam</h3>
+					<div class="wrapper">
+						<div class="box">
+							<div class="image-circle">
+								<span class="ble-count" id="comp-ble">-</span>
+							</div>
+							<div class="ble-countertype">Bluetooth LE</div>
+						</div>
 
-</div>
+						<div class="box right">
+							<div class="image-circle">
+								<span class="ble-count" id="comp-modcam">-</span>
+							</div>
+							<div class="ble-countertype">Modcam</div>
+						</div>
+					</div>
+					</section>
+				</div>
+				<div class="row">
+					<div class="four columns">
+						<div class="widget day">
+							<div class="sec-title">The most occupied time of the day</div>
+							<div class="sec-number" id="most"> - | - </div>
+						</div>
+					</div>
+					<div class="four columns">
+						<div class="widget day">
+							<div class="sec-title">Most occupied date in the office</div>
+							<div class="sec-date" id="mostOccupied"> - | - </div>
+						</div>
+					</div>
+					<div class="four columns">
+						<div class="widget day">
+							<div class="sec-title">Least occupied date in the office</div>
+							<div class="sec-date" id="leastOccupied"> - | - </div>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="five columns">
+					<section id="widgets">
+					<div class="widget day">
+						<div class="title" >The most occupied time of the day</div>
+						<div class="number" id="most"> - | - </div>
+					</div>
+					<br>
+					<div class="widget">
+						<div class="title">Most occupied date in the office</div>
+						<div class="date" id="mostOccupied"> - | - </div>
+					</div>
+					<div class="widget">
+						<div class="title">Least occupied date in the office</div>
+						<div class="date" id="leastOccupied"> - | - </div>
+					</div>
+					</section>
+				</div>-->
+			</div>
+			<div class="row">
+				<div class="twelve columns weekly-indicator">
+					<div class="week-wrapper">
+						<div class="week-title">Week <span id="week">-</span></div>
+						<ul class="days-text">
+							<li>Mo</li>
+							<li>Tu</li>
+							<li>We</li>
+							<li>Th</li>
+							<li>Fr</li>
+							<li>Sa</li>
+							<li>Su</li>
+						</ul>
+						<ul class="days-data">
+							<li id="mon" class="none" data-tooltip="0"></li>
+							<li id="tue" class="none" data-tooltip="0"></li>
+							<li id="wed" class="none" data-tooltip="0"></li>
+							<li id="thu" class="none" data-tooltip="0"></li>
+							<li id="fri" class="none" data-tooltip="0"></li>
+							<li id="sat" class="none" data-tooltip="0"></li>
+							<li id="sun" class="none" data-tooltip="0"></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+		</div>
 
 
-<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script src="js/app.js" type="text/javascript"></script>
-</body>
+		<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+		<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		<script src="js/app.js" type="text/javascript"></script>
+	</body>
 </html>
