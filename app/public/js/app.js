@@ -132,7 +132,7 @@ function loadCountByDay(date){
 function socketOnMessage(evt){
 	let data = JSON.parse(evt.data)
 	console.log('data: %s', data)
-	update(data.direction, data.value)
+	update(data.direction, data.count)
 	let v = $('#comp-modcam').html()
 	$('#comp-modcam').html(parseInt(v)+data.count)
 }
