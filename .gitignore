@@ -2,3 +2,5 @@
 node_modules
 .secret
 npm-debug.log
+*.conf
+pub_test.sh
