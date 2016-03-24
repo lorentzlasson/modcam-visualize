@@ -9,16 +9,18 @@ function set(direction, value){
 }
 
 function setWeek(counts){
-	$('.days-data li').removeClass('none green yellow red').addClass('none')
-
-	for (let i = 0; i < 7; i++){
-		let day = getDayName(''+i)
-		$('#' + day).attr('data-tooltip', 0)
-	}
-
+	clearWeek()
 	counts.forEach(function(item){
 		setWeekColor(getDayName(item.day), item.value)
 	})
+}
+
+function clearWeek(){
+	for (let i = 0; i < 7; i++){
+		let day = getDayName(i)
+		$('#' + day).removeClass('none green yellow red').addClass('none')
+		$('#' + day).attr('data-tooltip', 0)
+	}
 }
 
 function setWeekColor(name, value){
@@ -35,7 +37,7 @@ function setWeekColor(name, value){
 	}
 
 
-	$('#'+name).removeClass('none green yellow red').addClass(cname)
+	$('#'+name).removeClass('none').addClass(cname)
 	$('#'+name).attr('data-tooltip', value)
 }
 
