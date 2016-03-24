@@ -26,7 +26,8 @@ let getByWeek = (date) => {
 
 	return getByDate(startkey, endkey, (rows) => {
 		return rows.filter((item) => {
-			return !item.key[3]
+			let direction = item.key[3]
+			return direction === 0 // only keep counts of people comming in
 		})
 		.map((item) => {
 			let date = item.key.slice(0,3).join()
