@@ -9,7 +9,8 @@ const getByDay = (date) => {
 	const startkey = day.concat([0])
 	const endkey = day.concat([1])
 
-	return getByDate(startkey, endkey, (rows) => {
+	const params = getParams(startkey, endkey)
+	return getView('total_by_date', params, (rows) => {
 		return rows.map((item) => {
 			return item.value
 		})
@@ -24,7 +25,8 @@ const getByWeek = (date) => {
 	const startkey = startSplit.concat([0])
 	const endkey = endSplit.concat([1])
 
-	return getByDate(startkey, endkey, (rows) => {
+	const params = getParams(startkey, endkey)
+	return getView('total_by_date', params, (rows) => {
 		return rows.filter((item) => {
 			const direction = item.key[3]
 			return direction === 0 // only keep counts of people comming in
@@ -40,17 +42,19 @@ const getByWeek = (date) => {
 	})
 }
 
-const getByDate = (startkey, endkey, massage) => {
-	return new Promise((resolve, reject) => {
-		const params = {
-			reduce: true,
-			group_level: 4,
-			startkey,
-			endkey
-		}
-		debug('params: %j', params)
+const getParams = (startkey, endkey) => {
+	return {
+		reduce: true,
+		group_level: 4,
+		startkey,
+		endkey
+	}
+}
 
-		db.view('data', 'total_by_date', params, (err, body) => {
+const getView = (view, params, massage) => {
+	console.log('param', params)
+	return new Promise((resolve, reject) => {
+		db.view('data', view, params, (err, body) => {
 			if (!err) {
 				debug('data retreived: %j', body)
 				const values = massage(body.rows)
