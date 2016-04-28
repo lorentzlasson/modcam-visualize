@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const util = require('../../util')
+const moment = require('moment')
 const db = require('../../database/peoplecount')
 
 router.get('*', (req, res, next) => {
-	let date = new Date(req.query.date)
-	if(!util.isValidDate(date)){
+	const date = moment.utc(req.query.date)
+	if(!date.isValid()){
 		return res.status(400).json({
 			error: 'invalid date'
 		})

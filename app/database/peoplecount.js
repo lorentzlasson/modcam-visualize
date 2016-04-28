@@ -2,13 +2,12 @@ const debug = require('debug')('modcam:database')
 const cloudant = require('./')
 const db = cloudant.use('counterdb')
 const util = require('../util')
+const moment = require('moment')
 
 let getByDay = (date) => {
-	let dateSplit = util.splitDate(date)
-	let startkey = dateSplit.slice(0)
-	startkey.push(0)
-	let endkey = dateSplit.slice(0)
-	endkey.push(1)
+	const day = util.splitDate(date).splice(0, 3)
+	const startkey = day.concat([0])
+	const endkey = day.concat([1])
 
 	return getByDate(startkey, endkey, (rows) => {
 		return rows.map((item) => {
@@ -18,11 +17,14 @@ let getByDay = (date) => {
 }
 
 let getByWeek = (date) => {
-	let week = util.getWeek(date)
-	let startkey = util.splitDate(week.start)
-	startkey.push(0)
-	let endkey = util.splitDate(week.end)
-	endkey.push(1)
+	const start = moment(date).startOf('isoWeek')
+	const end = moment(date).endOf('isoWeek')
+	const startSplit = util.splitDate(start)
+	const endSplit = util.splitDate(end)
+	const startkey = startSplit.concat([0])
+	const endkey = endSplit.concat([1])
+	console.log(startkey)
+	console.log(endkey)
 
 	return getByDate(startkey, endkey, (rows) => {
 		return rows.filter((item) => {
