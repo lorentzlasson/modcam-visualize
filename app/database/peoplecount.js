@@ -20,7 +20,7 @@ const getByDay = (date) => {
 const getByWeek = (date) => {
 	const start = moment(date).startOf('isoWeek')
 	const end = moment(date).endOf('isoWeek')
-	const startSplit = util.splitDate(start)
+	const startSplit = util.splitDate(start).splice(0, 3)
 	const endSplit = util.splitDate(end)
 	const startkey = startSplit.concat([0])
 	const endkey = endSplit.concat([1])
