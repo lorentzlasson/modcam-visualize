@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "app/index.js",
   "scripts": {
-    "start": "node --use_strict ."
+    "start": "node ."
   },
   "dependencies": {
     "cfenv": "1.0.x",
