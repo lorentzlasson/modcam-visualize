@@ -1,17 +1,17 @@
 const debug = require('debug')('modcam:websocket')
 
-var wss
+let wss
 
-var start = () => {
-	var WebSocketServer = require('ws').Server
-	var server = require('../server')
+const start = () => {
+	const WebSocketServer = require('ws').Server
+	const server = require('../server')
 	wss = new WebSocketServer({server, path: '/ws/counter'})
 
 	wss.on('connection', function(ws) {
 		debug('client connected')
 
 		ws.on('message', function(data) {
-			var msg = 'message received: ' + data
+			const msg = 'message received: ' + data
 			debug(msg)
 			ws.send(msg)
 		})
@@ -22,7 +22,7 @@ var start = () => {
 	})
 }
 
-var broadcast = (message) => {
+const broadcast = (message) => {
 	wss.clients.forEach((client) => {
 		client.send(message)
 	})

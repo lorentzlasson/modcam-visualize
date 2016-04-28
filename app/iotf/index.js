@@ -9,14 +9,14 @@ const db = require('../database/peoplecount')
 if(!creds)
 	throw new Error('credentials not found')
 
-let start = () => {
-	let config = {
+const start = () => {
+	const config = {
 		'org': creds.org,
 		'id': appEnv.name || 'modcam-visualize',
 		'auth-key': creds.apiKey,
 		'auth-token': creds.apiToken
 	}
-	let client = new iotf.IotfApplication(config)
+	const client = new iotf.IotfApplication(config)
 	client.connect()
 	client.on('connect', () => {
 		debug('connected')
@@ -25,9 +25,9 @@ let start = () => {
 	client.on('deviceEvent', receiveCount)
 }
 
-let receiveCount = (deviceType, deviceId, eventType, format, payload) => {
+const receiveCount = (deviceType, deviceId, eventType, format, payload) => {
 	debug('%s received', eventType)
-	let message = payload.toString()
+	const message = payload.toString()
 	websocket.broadcast(message)
 	db.storeCount(JSON.parse(message))
 	.then((response) => {
