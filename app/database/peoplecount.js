@@ -4,6 +4,19 @@ const db = cloudant.use('counterdb')
 const util = require('../util')
 const moment = require('moment')
 
+const getByHour = (date) => {
+	const hour = util.splitDate(date).splice(0, 4)
+	const startkey = hour.concat([0])
+	const endkey = hour.concat([1])
+
+	const params = getParams(startkey, endkey)
+	return getView('total_by_hour', params, (rows) => {
+		return rows.map((item) => {
+			return item.value
+		})
+	})
+}
+
 const getByDay = (date) => {
 	const day = util.splitDate(date).splice(0, 3)
 	const startkey = day.concat([0])
@@ -79,5 +92,6 @@ const storeCount = (count) => {
 module.exports = {
 	getByDay,
 	getByWeek,
+	getByHour,
 	storeCount
 }

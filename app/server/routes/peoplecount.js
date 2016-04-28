@@ -14,6 +14,20 @@ router.get('*', (req, res, next) => {
 	return next()
 })
 
+router.get('/hour/', (req, res) => {
+	db.getByHour(req.date)
+	.then((counts) => {
+		res.json({
+			counts
+		})
+	})
+	.catch((err) => {
+		res.status(400).json({
+			error: err
+		})
+	})
+})
+
 router.get('/day/', (req, res) => {
 	db.getByDay(req.date)
 	.then((counts) => {
