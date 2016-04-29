@@ -101,8 +101,8 @@ function updateSelectedDate(newDate){
 }
 
 function loadCounts(){
-	loadCountByDay(currentDate)
-	loadCountByWeek(currentDate)
+	loadCountByDay(currentDateISO)
+	loadCountByWeek(currentDateISO)
 }
 
 function loadCountByWeek(date){
@@ -165,6 +165,7 @@ let host = window.document.location.host
 let socketAdr = 'ws://' + host + '/ws/counter'
 let today = getToday()
 let currentDate = new Date(today)
+let currentDateISO = currentDate.toISOString()
 
 $(document).ready(function(){
 	createDatepicker()
