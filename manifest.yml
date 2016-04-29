@@ -1,0 +1,11 @@
+---
+applications:
+- name: modcam-visualizer
+  memory: 128M
+  instances: 1
+  buildpack: https://github.com/cloudfoundry/nodejs-buildpack
+  host: modcam-visualizer
+  domain: eu-gb.mybluemix.net
+  services:
+  - my-iotf
+  - my-cloudant
