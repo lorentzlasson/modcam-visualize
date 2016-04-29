@@ -7,16 +7,16 @@ const start = () => {
 	const server = require('../server')
 	wss = new WebSocketServer({server, path: '/ws/counter'})
 
-	wss.on('connection', function(ws) {
+	wss.on('connection', (ws) => {
 		debug('client connected')
 
-		ws.on('message', function(data) {
+		ws.on('message', (data) => {
 			const msg = 'message received: ' + data
 			debug(msg)
 			ws.send(msg)
 		})
 
-		ws.on('close', function() {
+		ws.on('close', () => {
 			debug('client disconnected')
 		})
 	})
