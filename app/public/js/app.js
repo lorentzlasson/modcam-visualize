@@ -1,6 +1,5 @@
-Date.prototype.getWeek = function() {
-	let onejan = new Date(this.getFullYear(), 0, 1)
-	return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7) - 1
+function getWeek(){
+	return moment.utc().format('WW')
 }
 
 function set(direction, value){
@@ -72,12 +71,7 @@ function render(){
 }
 
 function getToday(){
-	let d = new Date()
-	d.setHours(1)
-	d.setMinutes(0)
-	d.setSeconds(0)
-	d.setMilliseconds(0)
-	return d
+	return moment.utc().startOf('day')
 }
 
 function createDatepicker(){
@@ -88,19 +82,21 @@ function createDatepicker(){
 			updateSelectedDate(selectedDate)
 		}
 	})
-	$('#datepicker').datepicker('setDate', today)
+	let jsDate = moment(today).toDate()
+	$('#datepicker').datepicker('setDate', jsDate)
 }
 
 function updateSelectedDate(newDate){	
-	if (newDate.getTime() == currentDate.getTime()){
+	newDate = moment(newDate).startOf('day') // convert to moment object
+	if(newDate.isSame(currentDate, 'day')){
 		return
 	}
-	currentDate = new Date(newDate)
-	currentDate.setHours(currentDate.getHours()+1)
+	currentDate = newDate
 	loadCounts()
 }
 
 function loadCounts(){
+	let currentDateISO = currentDate.format()
 	loadCountByDay(currentDateISO)
 	loadCountByWeek(currentDateISO)
 }
@@ -164,12 +160,11 @@ let socket = undefined
 let host = window.document.location.host
 let socketAdr = 'ws://' + host + '/ws/counter'
 let today = getToday()
-let currentDate = new Date(today)
-let currentDateISO = currentDate.toISOString()
+let currentDate = moment.utc(today)
 
 $(document).ready(function(){
 	createDatepicker()
 	loadCounts()
 	connectSocket()
-	$('#week').html(currentDate.getWeek())
+	$('#week').html(getWeek(currentDate))
 })

@@ -16,4 +16,6 @@ env:
   node: true
   browser: true
   jquery: true
+globals:
+    moment: true
 extends: 'eslint:recommended'
