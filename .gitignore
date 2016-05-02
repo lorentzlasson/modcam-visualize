@@ -1,6 +1,6 @@
 *.swp
 node_modules
-.secret
+.secrets
 npm-debug.log
 *.conf
 pub_test.sh
